@@ -2,6 +2,7 @@ const navToggle = document.getElementById("navToggle");
 const siteNav = document.getElementById("siteNav");
 const yearNode = document.getElementById("year");
 const contactForm = document.getElementById("contactForm");
+const quickContactForm = document.getElementById("quickContactForm");
 
 navToggle?.addEventListener("click", () => {
   const isOpen = siteNav?.classList.toggle("open");
@@ -32,6 +33,17 @@ contactForm?.addEventListener("submit", (event) => {
   const servicio = encodeURIComponent(data.get("servicio") || "");
   const mensaje = encodeURIComponent(data.get("mensaje") || "");
   const texto = `Hola M&R Asociados, quiero solicitar una asesoria.%0A%0ANombre: ${nombre}%0AEmpresa: ${empresa}%0AServicio: ${servicio}%0AMensaje: ${mensaje}`;
+
+  window.open(`https://wa.me/51956308249?text=${texto}`, "_blank", "noopener,noreferrer");
+});
+
+quickContactForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const data = new FormData(quickContactForm);
+  const nombre = encodeURIComponent(data.get("nombre") || "");
+  const telefono = encodeURIComponent(data.get("telefono") || "");
+  const texto = `Hola M&R Asociados, quiero una primera orientacion.%0A%0ANombre: ${nombre}%0AWhatsApp: ${telefono}`;
 
   window.open(`https://wa.me/51956308249?text=${texto}`, "_blank", "noopener,noreferrer");
 });
