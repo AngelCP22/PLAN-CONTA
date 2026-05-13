@@ -1198,7 +1198,7 @@ h3 {
 
 .mr-section {
   padding: 96px 0;
-  scroll-margin-top: 92px;
+  scroll-margin-top: 118px;
 }
 
 .mr-split,
@@ -1356,6 +1356,7 @@ h3 {
   background:
     linear-gradient(135deg, rgba(214, 162, 31, 0.08), transparent 42%),
     #fbfaf7;
+  padding-top: 76px;
 }
 
 .plans-carousel {
@@ -1438,6 +1439,74 @@ h3 {
 
 .mr-contact {
   padding-bottom: 120px;
+}
+
+.mr-results {
+  background: #ffffff;
+}
+
+.results-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 34px;
+}
+
+.result-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 250, 247, 0.94));
+  border: 1px solid var(--mr-line);
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(6, 20, 38, 0.08);
+  min-height: 260px;
+  padding: 24px;
+}
+
+.result-card span {
+  color: var(--mr-gold);
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.result-card h3 {
+  color: var(--mr-navy-800);
+  font-size: 1.55rem;
+}
+
+.result-card p {
+  color: var(--mr-muted);
+  line-height: 1.7;
+}
+
+.results-summary {
+  background:
+    radial-gradient(circle at top right, rgba(214, 162, 31, 0.18), transparent 34%),
+    linear-gradient(135deg, var(--mr-navy-950), var(--mr-navy-800));
+  border-radius: 24px;
+  color: #ffffff;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 22px;
+  padding: 26px;
+}
+
+.results-summary div {
+  display: grid;
+  gap: 6px;
+}
+
+.results-summary strong {
+  color: var(--mr-gold-2);
+  font-size: 1.65rem;
+}
+
+.results-summary span {
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.5;
 }
 
 .mr-contact-card {
@@ -1540,6 +1609,8 @@ h3 {
   .mr-strip-grid,
   .mr-purpose-grid,
   .mr-services-grid,
+  .results-grid,
+  .results-summary,
   .mr-mini-cards {
     grid-template-columns: 1fr;
   }
@@ -1582,11 +1653,12 @@ h3 {
 
   .plans-carousel {
     grid-template-columns: 1fr 1fr;
+    margin-top: 18px;
   }
 
   .plans-track {
     grid-column: 1 / -1;
-    min-height: 430px;
+    min-height: 400px;
     order: -1;
   }
 
@@ -1614,13 +1686,36 @@ h3 {
 
   .mr-section {
     padding: 68px 0;
+    scroll-margin-top: 96px;
+  }
+
+  .mr-plans {
+    padding-top: 34px;
+  }
+
+  .mr-plans .mr-section-head h2 {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    line-height: 1.03;
+  }
+
+  .plans-track {
+    min-height: 382px;
   }
 
   .mr-hero-panel,
   .mr-purpose-grid article,
   .mr-services-grid article,
   .plan-card,
+  .result-card,
   .mr-contact-card {
+    padding: 22px;
+  }
+
+  .plan-card {
+    min-height: 382px;
+  }
+
+  .results-summary {
     padding: 22px;
   }
 
