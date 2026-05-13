@@ -1,0 +1,218 @@
+---
+import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+  ["Gestión contable", "Registro de operaciones, conciliaciones, análisis de cuentas y estados financieros."],
+  ["Gestión tributaria", "Declaraciones IGV, renta, libros electrónicos y seguimiento de obligaciones SUNAT."],
+  ["Gestión laboral", "Altas, bajas, planillas, beneficios sociales y soporte documental laboral."],
+  ["Drawback", "Revisión de requisitos, DAM/DUA, compras vinculadas y sustento para solicitudes."],
+  ["Exportadores", "Saldo a favor del exportador, PDB Exportadores y control documentario de comercio exterior."],
+  ["Reportes de gestión", "Información clara para revisar obligaciones, gastos, riesgos y prioridades."],
+];
+
+const plans = [
+  {
+    name: "Plan Emprende",
+    title: "Para formalizar y empezar bien",
+    text: "Ideal para negocios nuevos que necesitan orden tributario básico y una ruta clara de cumplimiento.",
+    items: ["Orientación de régimen tributario.", "Calendario de obligaciones iniciales.", "Orden documentario y comprobantes.", "Declaraciones mensuales esenciales."],
+  },
+  {
+    name: "Plan Negocio",
+    title: "Para operar con control mensual",
+    text: "Para empresas en marcha que requieren gestión contable, tributaria y seguimiento permanente.",
+    items: ["Registro de compras, ventas y operaciones.", "Declaraciones IGV, renta y libros electrónicos.", "Conciliaciones y reportes mensuales.", "Alertas ante inconsistencias o vencimientos."],
+    featured: true,
+  },
+  {
+    name: "Plan Premium",
+    title: "Para crecer con mirada estratégica",
+    text: "Para empresas que necesitan control integral, prevención tributaria y lectura financiera para decidir.",
+    items: ["Diagnóstico preventivo de riesgos.", "Gestión contable, tributaria y laboral integral.", "Indicadores de gestión y reuniones periódicas.", "Acompañamiento en fiscalizaciones o requerimientos."],
+  },
+];
+
+const results = [
+  ["Ingeodrilling SAC", "Conciliaciones y registros ordenados", "Se estructuró el flujo mensual de documentos para reducir reprocesos y mejorar trazabilidad.", "Solución: cierre mensual más claro."],
+  ["Ingeniería Geología & Minería S.A.C.", "Compras y ventas con mejor sustento", "Se revisó la consistencia de comprobantes y registros para presentar información más confiable.", "Solución: menor exposición a observaciones."],
+  ["Ingeotecnia SAC", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Solución: calendario tributario visible."],
+  ["Cayotopa Cuba Sergio", "Información centralizada para consultas", "Se concentró documentación clave para facilitar declaraciones, respuestas y control interno.", "Solución: soporte documentario disponible."],
+];
+---
+
+<BaseLayout>
+  <Header />
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-bg"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Asesoría empresarial estratégica</p>
+          <h1>Gestión contable, tributaria y laboral con enfoque estratégico.</h1>
+          <p>Somos tu aliado estratégico empresarial. Disminuimos riesgos tributarios, ordenamos tu información y te damos claridad para tomar mejores decisiones.</p>
+          <div class="actions">
+            <a class="button gold" href="https://wa.me/51956308249" target="_blank" rel="noreferrer">Escríbenos al 956-308-249</a>
+            <a class="button ghost" href="#servicios">Ver servicios</a>
+          </div>
+          <ul class="chips">
+            <li>Contabilidad mensual</li>
+            <li>Declaraciones IGV-Renta</li>
+            <li>Planilla electrónica</li>
+            <li>Drawback y exportación</li>
+          </ul>
+        </div>
+        <aside class="hero-panel">
+          <div class="panel-top">
+            <span>Disponible para Lima y todo Perú</span>
+            <strong>Perfil M&amp;R Asociados</strong>
+          </div>
+          <div class="metrics">
+            <article><span>Empresas acompañadas</span><strong>4+</strong></article>
+            <article><span>Frentes ordenados</span><strong>4</strong></article>
+            <article><span>Respuesta promedio</span><strong>24 h</strong></article>
+          </div>
+          <p>Especialidad en gestión contable, tributaria, laboral y soporte para empresas exportadoras.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="strip" id="nosotros">
+      <div class="container strip-grid">
+        <article><strong>Contable</strong><span>registros, conciliaciones y reportes</span></article>
+        <article><strong>Tributario</strong><span>declaraciones, libros y prevención</span></article>
+        <article><strong>Exportación</strong><span>drawback, SFE y sustento documental</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="propositos">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Quiénes somos</p>
+          <h2>Tu aliado estratégico empresarial.</h2>
+          <p>En M&R Asociados ordenamos la información contable, tributaria y laboral para que la empresa tenga claridad, cumpla a tiempo y reduzca riesgos.</p>
+        </div>
+        <div class="feature-grid">
+          <article><span>01</span><strong>Cálculos exactos</strong></article>
+          <article><span>02</span><strong>Cumplimiento normativo</strong></article>
+          <article><span>03</span><strong>Claridad financiera</strong></article>
+          <article><span>04</span><strong>Prevención tributaria</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="proceso">
+      <div class="container">
+        <div class="section-head left">
+          <p class="eyebrow">Proceso de trabajo</p>
+          <h2>Una metodología clara para pasar del desorden al control.</h2>
+          <p>Cada etapa está pensada para entender la situación actual, ordenar la información y sostener el cumplimiento sin improvisar.</p>
+        </div>
+        <div class="steps">
+          <article><span>01</span><h3>Diagnóstico inicial</h3><p>Revisión de régimen, documentos, obligaciones pendientes y riesgos visibles.</p></article>
+          <article><span>02</span><h3>Plan de orden</h3><p>Prioridades, fechas, responsables y entregables para cada área.</p></article>
+          <article><span>03</span><h3>Ejecución mensual</h3><p>Registros, declaraciones, planillas, conciliaciones y reportes.</p></article>
+          <article><span>04</span><h3>Seguimiento preventivo</h3><p>Alertas, revisión de inconsistencias y acompañamiento en decisiones.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section export" id="exportacion">
+      <div class="container export-grid">
+        <div>
+          <p class="eyebrow">Exportación y drawback</p>
+          <h2>Soporte contable y tributario para empresas exportadoras.</h2>
+          <p>Integramos contabilidad, documentación de comercio exterior y beneficios tributarios para que la empresa tenga sustento claro antes de solicitar o responder ante SUNAT.</p>
+        </div>
+        <div class="export-cards">
+          <article><h3>Drawback</h3><p>Revisión de DAM/DUA, insumos, compras vinculadas y documentación exigida para sustentar solicitudes.</p></article>
+          <article><h3>Saldo a favor del exportador</h3><p>Control de compras, ventas, IGV y soporte para gestionar el beneficio cuando corresponda.</p></article>
+          <article><h3>PDB Exportadores</h3><p>Preparación y consistencia de información para presentar beneficios con menor riesgo de observaciones.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-head left">
+          <p class="eyebrow">Servicios</p>
+          <h2>Gestión integral para reducir riesgos y ordenar tu operación.</h2>
+        </div>
+        <div class="cards">
+          {services.map(([title, text]) => <article><h3>{title}</h3><p>{text}</p></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section plans" id="planes">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Planes de acompañamiento</p>
+          <h2>Elige el soporte según el momento de tu empresa.</h2>
+          <p>Planes comparables por etapa, alcance y nivel de complejidad. Se ajustan luego del diagnóstico inicial.</p>
+        </div>
+        <div class="plan-grid">
+          {plans.map((plan) => (
+            <article class:list={["plan", { featured: plan.featured }]}>
+              {plan.featured && <div class="badge">Más solicitado</div>}
+              <span>{plan.name}</span>
+              <h3>{plan.title}</h3>
+              <p>{plan.text}</p>
+              <ul>{plan.items.map((item) => <li>{item}</li>)}</ul>
+              <a href="#contacto">{plan.featured ? "Conversar por WhatsApp" : "Solicitar asesoría"}</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="container">
+        <div class="section-head left">
+          <p class="eyebrow">Resultados obtenidos</p>
+          <h2>Empresas acompañadas con problemas concretos resueltos.</h2>
+          <p>Mejoras verificables: información ordenada, obligaciones bajo control y criterios claros para responder ante SUNAT.</p>
+        </div>
+        <div class="impact-grid">
+          {results.map(([company, title, text, solution]) => (
+            <article><span>{company}</span><h3>{title}</h3><p>{text}</p><strong>{solution}</strong></article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contacto">
+      <div class="container contact-card">
+        <div>
+          <p class="eyebrow">Contacto</p>
+          <h2>¿Listo para ordenar tu gestión contable y tributaria?</h2>
+          <p>Escríbenos y solicita una asesoría para revisar la situación actual de tu empresa.</p>
+          <div class="contact-pills"><a href="tel:+51956308249">+51 956-308-249</a><span>Lima, Perú</span></div>
+        </div>
+        <form data-whatsapp-form>
+          <input name="nombre" type="text" placeholder="Tu nombre" />
+          <input name="telefono" type="tel" placeholder="WhatsApp" />
+          <select name="servicio">
+            <option>Gestión contable</option>
+            <option>Gestión tributaria</option>
+            <option>Drawback y exportación</option>
+            <option>Plan Negocio</option>
+          </select>
+          <button class="button gold" type="submit">Solicitar llamada</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <a class="brand" href="#inicio">
+        <img src={`${import.meta.env.BASE_URL}assets/logo-mark.png`} alt="Logo M&R Asociados" width="42" height="42" />
+        <span><strong>M&amp;R Asociados</strong><small>Gestión contable, tributaria y laboral</small></span>
+      </a>
+      <div><strong>Servicios</strong><a href="#servicios">Gestión contable</a><a href="#exportacion">Drawback y exportación</a><a href="#planes">Planes</a></div>
+      <div><strong>Contacto</strong><a href="tel:+51956308249">956-308-249</a><a href="https://wa.me/51956308249">WhatsApp directo</a></div>
+    </div>
+    <div class="container footer-bottom"><span>2026 M&amp;R Asociados. Todos los derechos reservados.</span><span>Vista Astro optimizada para GitHub Pages.</span></div>
+  </footer>
+</BaseLayout>
