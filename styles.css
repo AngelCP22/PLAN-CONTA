@@ -1132,37 +1132,65 @@ h3 {
 
 .mr-hero-panel {
   backdrop-filter: blur(18px);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  background: linear-gradient(180deg, rgba(17, 54, 86, 0.92), rgba(104, 132, 154, 0.88));
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 28px;
   box-shadow: 0 24px 70px rgba(6, 20, 38, 0.16);
   padding: 30px;
 }
 
-.mr-hero-panel span {
-  color: var(--mr-gold-2);
+.mr-panel-top {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.mr-panel-top span {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: #ffffff;
   display: inline-flex;
   font-size: 0.78rem;
   font-weight: 900;
-  margin-bottom: 14px;
+  padding: 10px 14px;
   text-transform: uppercase;
 }
 
-.mr-hero-panel h2 {
+.mr-panel-top strong {
   color: #ffffff;
-  font-size: clamp(2rem, 3vw, 3.1rem);
+  white-space: nowrap;
 }
 
-.mr-hero-panel p,
-.mr-hero-panel strong {
+.mr-panel-metrics {
+  display: grid;
+  gap: 14px;
+}
+
+.mr-panel-metrics article {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+}
+
+.mr-panel-metrics span {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 700;
+}
+
+.mr-panel-metrics strong {
+  color: #ffffff;
+  font-size: 2.1rem;
+}
+
+.mr-hero-panel p {
   color: rgba(255, 255, 255, 0.78);
   line-height: 1.7;
-}
-
-.mr-hero-panel div {
-  display: grid;
-  gap: 10px;
-  margin-top: 22px;
+  margin: 28px 0 0;
 }
 
 .mr-strip {
@@ -1623,6 +1651,11 @@ h3 {
   .mr-hero-panel {
     max-width: 620px;
   }
+
+  .mr-panel-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 860px) {
@@ -1709,6 +1742,23 @@ h3 {
   .result-card,
   .mr-contact-card {
     padding: 22px;
+  }
+
+  .mr-panel-top {
+    margin-bottom: 18px;
+  }
+
+  .mr-panel-top span {
+    font-size: 0.7rem;
+    padding: 9px 11px;
+  }
+
+  .mr-panel-top strong {
+    white-space: normal;
+  }
+
+  .mr-panel-metrics article {
+    padding: 16px;
   }
 
   .plan-card {
