@@ -68,6 +68,45 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
           window.open(`https://wa.me/51956308249?text=${mensaje}`, "_blank", "noopener,noreferrer");
         });
       });
+
+      const clockNode = document.querySelector("[data-clock]");
+      const weekdayNode = document.querySelector("[data-weekday]");
+      const dayNode = document.querySelector("[data-day]");
+      const monthYearNode = document.querySelector("[data-month-year]");
+      const updateCalendar = () => {
+        const now = new Date();
+        const time = new Intl.DateTimeFormat("es-PE", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+          timeZone: "America/Lima",
+        }).format(now);
+        const weekday = new Intl.DateTimeFormat("es-PE", {
+          weekday: "long",
+          timeZone: "America/Lima",
+        }).format(now);
+        const monthYear = new Intl.DateTimeFormat("es-PE", {
+          month: "long",
+          year: "numeric",
+          timeZone: "America/Lima",
+        }).format(now);
+        if (clockNode) clockNode.textContent = time;
+        if (weekdayNode) weekdayNode.textContent = weekday;
+        if (dayNode) dayNode.textContent = new Intl.DateTimeFormat("es-PE", { day: "2-digit", timeZone: "America/Lima" }).format(now);
+        if (monthYearNode) monthYearNode.textContent = monthYear;
+      };
+      updateCalendar();
+      setInterval(updateCalendar, 30000);
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      document.querySelectorAll(".reveal-card").forEach((node) => revealObserver.observe(node));
     </script>
   </body>
 </html>

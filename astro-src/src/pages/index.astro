@@ -39,6 +39,14 @@ const results = [
   ["Ingeotecnia SAC", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Solución: calendario tributario visible."],
   ["Cayotopa Cuba Sergio", "Información centralizada para consultas", "Se concentró documentación clave para facilitar declaraciones, respuestas y control interno.", "Solución: soporte documentario disponible."],
 ];
+
+const stats = [
+  ["15+", "años de experiencia"],
+  ["749", "clientes asesorados"],
+  ["7", "especialistas aliados"],
+  ["9", "áreas de servicio"],
+  ["371", "procesos estructurados"],
+];
 ---
 
 <BaseLayout>
@@ -62,17 +70,25 @@ const results = [
             <li>Drawback y exportación</li>
           </ul>
         </div>
-        <aside class="hero-panel">
-          <div class="panel-top">
-            <span>Disponible para Lima y todo Perú</span>
-            <strong>Perfil M&amp;R Asociados</strong>
+        <aside class="calendar-panel reveal-card">
+          <div class="calendar-top">
+            <span>Calendario tributario</span>
+            <strong data-clock>--:--</strong>
           </div>
-          <div class="metrics">
-            <article><span>Empresas acompañadas</span><strong>4+</strong></article>
-            <article><span>Frentes ordenados</span><strong>4</strong></article>
-            <article><span>Respuesta promedio</span><strong>24 h</strong></article>
+          <div class="calendar-date">
+            <span data-weekday>Actualizando</span>
+            <strong data-day>--</strong>
+            <small data-month-year>--</small>
           </div>
-          <p>Especialidad en gestión contable, tributaria, laboral y soporte para empresas exportadoras.</p>
+          <div class="calendar-note">
+            <h2>Control de vencimientos en tiempo real.</h2>
+            <p>Organiza declaraciones, libros, planillas y alertas para no improvisar al cierre de cada periodo.</p>
+          </div>
+          <div class="calendar-items">
+            <span>IGV / Renta</span>
+            <span>PLAME</span>
+            <span>Libros electrónicos</span>
+          </div>
         </aside>
       </div>
     </section>
@@ -200,6 +216,25 @@ const results = [
           </select>
           <button class="button gold" type="submit">Solicitar llamada</button>
         </form>
+      </div>
+    </section>
+
+    <section class="stats-band" id="metricas">
+      <div class="stats-bg" aria-hidden="true"></div>
+      <div class="container stats-grid">
+        <div class="stats-copy">
+          <p class="eyebrow">Métricas de confianza</p>
+          <h2>Más de 15 años de experiencia</h2>
+          <p>Números que resumen trayectoria, capacidad de atención y amplitud de servicios para empresas que necesitan respaldo profesional.</p>
+        </div>
+        <div class="stats-numbers">
+          {stats.map(([number, label]) => (
+            <article>
+              <strong>{number}</strong>
+              <span>{label}</span>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   </main>
