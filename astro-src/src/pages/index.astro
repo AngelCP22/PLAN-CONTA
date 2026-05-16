@@ -222,15 +222,15 @@ const stats = [
     <section class="stats-band" id="metricas">
       <div class="stats-bg" aria-hidden="true"></div>
       <div class="container stats-grid">
-        <div class="stats-copy">
+        <div class="stats-copy reveal-card from-left">
           <p class="eyebrow">Métricas de confianza</p>
           <h2>Más de 15 años de experiencia</h2>
           <p>Números que resumen trayectoria, capacidad de atención y amplitud de servicios para empresas que necesitan respaldo profesional.</p>
         </div>
         <div class="stats-numbers">
-          {stats.map(([number, label]) => (
-            <article>
-              <strong>{number}</strong>
+          {stats.map(([number, label], index) => (
+            <article class:list={["reveal-card", index % 2 === 0 ? "from-right" : "from-bottom"]}>
+              <strong data-count={number}>{number}</strong>
               <span>{label}</span>
             </article>
           ))}
