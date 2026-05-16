@@ -25,6 +25,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add("is-enhanced");</script>
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "AccountingService",
@@ -98,32 +99,38 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       updateCalendar();
       setInterval(updateCalendar, 30000);
 
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            entry.target.querySelectorAll("[data-count]").forEach((node) => {
-              if (node.dataset.animated === "true") return;
-              node.dataset.animated = "true";
-              const raw = node.getAttribute("data-count") || "";
-              const numeric = Number(raw.replace(/\D/g, ""));
-              const suffix = raw.replace(/[0-9]/g, "");
-              if (!numeric) return;
-              const duration = 900;
-              const start = performance.now();
-              const tick = (time) => {
-                const progress = Math.min((time - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                node.textContent = `${Math.round(numeric * eased)}${suffix}`;
-                if (progress < 1) requestAnimationFrame(tick);
-              };
-              requestAnimationFrame(tick);
-            });
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.18 });
-      document.querySelectorAll(".reveal-card").forEach((node) => revealObserver.observe(node));
+      const canAnimate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealNodes = document.querySelectorAll(".reveal-card");
+      if (!canAnimate) {
+        revealNodes.forEach((node) => node.classList.add("is-visible"));
+      } else {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              entry.target.querySelectorAll("[data-count]").forEach((node) => {
+                if (node.dataset.animated === "true") return;
+                node.dataset.animated = "true";
+                const raw = node.getAttribute("data-count") || "";
+                const numeric = Number(raw.replace(/\D/g, ""));
+                const suffix = raw.replace(/[0-9]/g, "");
+                if (!numeric) return;
+                const duration = 900;
+                const start = performance.now();
+                const tick = (time) => {
+                  const progress = Math.min((time - start) / duration, 1);
+                  const eased = 1 - Math.pow(1 - progress, 3);
+                  node.textContent = `${Math.round(numeric * eased)}${suffix}`;
+                  if (progress < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+              });
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.18 });
+        revealNodes.forEach((node) => revealObserver.observe(node));
+      }
     </script>
   </body>
 </html>
