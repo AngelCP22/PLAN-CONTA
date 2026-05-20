@@ -73,7 +73,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       const clockNode = document.querySelector("[data-clock]");
       const weekdayNode = document.querySelector("[data-weekday]");
       const dayNode = document.querySelector("[data-day]");
-      const monthYearNode = document.querySelector("[data-month-year]");
+      const monthNode = document.querySelector("[data-month]");
+      const yearNode = document.querySelector("[data-year]");
       const updateCalendar = () => {
         const now = new Date();
         const time = new Intl.DateTimeFormat("es-PE", {
@@ -86,15 +87,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
           weekday: "long",
           timeZone: "America/Lima",
         }).format(now);
-        const monthYear = new Intl.DateTimeFormat("es-PE", {
+        const month = new Intl.DateTimeFormat("es-PE", {
           month: "long",
-          year: "numeric",
           timeZone: "America/Lima",
         }).format(now);
         if (clockNode) clockNode.textContent = time;
         if (weekdayNode) weekdayNode.textContent = weekday;
         if (dayNode) dayNode.textContent = new Intl.DateTimeFormat("es-PE", { day: "2-digit", timeZone: "America/Lima" }).format(now);
-        if (monthYearNode) monthYearNode.textContent = monthYear;
+        if (monthNode) monthNode.textContent = month;
+        if (yearNode) yearNode.textContent = new Intl.DateTimeFormat("es-PE", { year: "numeric", timeZone: "America/Lima" }).format(now);
       };
       updateCalendar();
       setInterval(updateCalendar, 30000);
