@@ -4,6 +4,7 @@
   --navy-800: #0b2442;
   --gold: #b88909;
   --gold-2: #d6a21f;
+  --gold-text: #8a6508; /* dorado oscurecido para texto sobre fondos claros (WCAG AA) */
   --ink: #0d1b2a;
   --muted: #64748b;
   --line: rgba(8, 26, 48, 0.12);
@@ -13,18 +14,27 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* overflow-x: clip evita el scroll horizontal que generan las tarjetas que
+   entran desde los laterales (.reveal-card.from-left/right) antes de revelarse.
+   'clip' (a diferencia de 'hidden') no crea contenedor de scroll, así que no
+   rompe el header sticky ni el scroll suave. Va en <html> porque ese es el
+   contenedor de scroll del documento. */
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   background: #ffffff;
   color: var(--ink);
   font-family: "Manrope", "Segoe UI", sans-serif;
   margin: 0;
+  overflow-x: clip;
 }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; }
 :focus-visible { border-radius: 6px; outline: 3px solid rgba(214, 162, 31, 0.7); outline-offset: 2px; }
 .sr-only { border: 0; clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px; }
+.skip-link { background: var(--gold-2); border-radius: 0 0 10px 0; color: var(--navy-950); font-weight: 800; left: 0; padding: 12px 18px; position: fixed; top: 0; transform: translateY(-120%); transition: transform .2s ease; z-index: 100; }
+.skip-link:focus { transform: translateY(0); }
+[aria-invalid="true"] { border-color: #c0392b !important; box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.18) !important; }
 .container { margin: 0 auto; width: min(calc(100% - 32px), var(--container)); }
 .site-header {
   backdrop-filter: blur(8px);
@@ -59,11 +69,15 @@ button, input, select, textarea { font: inherit; }
 .gold { background: linear-gradient(135deg, var(--gold-2), var(--gold)); border: 0; color: var(--navy-950); cursor: pointer; }
 .ghost { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: #fff; }
 .hero { background: var(--navy-950); color: #fff; min-height: 500px; overflow: hidden; padding: 70px 0 54px; position: relative; }
-.hero-bg { background-position: center; background-size: cover; inset: 0; position: absolute; }
-html.is-enhanced .hero-bg { animation: hero-zoom 16s ease-out forwards; }
+.hero-bg { inset: 0; overflow: hidden; position: absolute; }
+.hero-bg img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.hero-overlay { background: linear-gradient(90deg, rgba(6,20,38,.96), rgba(6,20,38,.78), rgba(6,20,38,.42)); inset: 0; position: absolute; }
+html.is-enhanced .hero-bg img { animation: hero-zoom 16s ease-out forwards; }
 @keyframes hero-zoom { from { transform: scale(1.07); } to { transform: scale(1); } }
 .hero-grid { align-items: center; display: grid; gap: 44px; grid-template-columns: 1.08fr .72fr; position: relative; z-index: 1; }
-.eyebrow { color: var(--gold-2); font-size: .78rem; font-weight: 900; margin: 0 0 12px; text-transform: uppercase; }
+.eyebrow { color: var(--gold-text); font-size: .78rem; font-weight: 900; margin: 0 0 12px; text-transform: uppercase; }
+/* Sobre fondos oscuros el dorado claro sí contrasta bien */
+.hero .eyebrow, .export .eyebrow, .stats-band .eyebrow { color: var(--gold-2); }
 h1, h2 { font-family: "Playfair Display", Georgia, serif; line-height: 1.05; margin: 0; }
 h1 { font-size: clamp(2.25rem, 3.65vw, 3.65rem); max-width: 640px; }
 h2 { font-size: clamp(2.15rem, 4vw, 4rem); max-width: 820px; }
@@ -139,7 +153,8 @@ p { line-height: 1.75; }
 .stats-numbers article { border-left: 3px solid rgba(255,255,255,.72); padding-left: 22px; transition: border-color .3s ease; }
 .stats-numbers article:hover { border-color: var(--gold-2); }
 .stats-numbers article:first-child { grid-row: span 2; }
-.stats-numbers strong { color: #fff; display: block; font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: 1; }
+.stats-numbers strong { color: #fff; display: block; font-size: clamp(2.8rem, 5vw, 4.2rem); font-variant-numeric: tabular-nums; line-height: 1; }
+[data-clock], [data-date] { font-variant-numeric: tabular-nums; }
 .stats-numbers span { color: rgba(255,255,255,.84); display: block; font-weight: 800; margin-top: 8px; }
 .wa-float { align-items: center; background: #25d366; border-radius: 999px; bottom: 22px; box-shadow: 0 14px 34px rgba(18,140,80,.4); color: #fff; display: inline-flex; height: 56px; justify-content: center; position: fixed; right: 22px; transition: box-shadow .25s ease, transform .25s ease; width: 56px; z-index: 60; }
 .wa-float:hover { box-shadow: 0 18px 42px rgba(18,140,80,.5); transform: translateY(-3px) scale(1.05); }
@@ -172,7 +187,7 @@ html.is-enhanced .impact-grid article.reveal-card.is-visible:hover { transform: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
   html.is-enhanced .reveal-card { opacity: 1; transform: none; }
-  html.is-enhanced .hero-bg { animation: none; }
+  html.is-enhanced .hero-bg img { animation: none; }
   .wa-float::after { animation: none; opacity: 0; }
 }
 .footer { background: var(--navy-950); color: rgba(255,255,255,.76); padding: 52px 0 28px; }
@@ -182,6 +197,8 @@ html.is-enhanced .impact-grid article.reveal-card.is-visible:hover { transform: 
 .footer-grid a { color: rgba(255,255,255,.72); transition: color .25s ease; }
 .footer-grid a:hover { color: var(--gold-2); }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); display: flex; font-size: .9rem; gap: 18px; justify-content: space-between; margin-top: 34px; padding-top: 20px; }
+.footer-bottom a { color: rgba(255,255,255,.85); text-decoration: underline; text-underline-offset: 2px; }
+.footer-bottom a:hover { color: var(--gold-2); }
 @media (max-width: 1080px) {
   .menu { gap: 12px; }
   .menu > a:not(.button) { font-size: .86rem; }
@@ -237,3 +254,9 @@ html.is-enhanced .impact-grid article.reveal-card.is-visible:hover { transform: 
   .wa-float { bottom: 18px; height: 52px; right: 18px; width: 52px; }
   .to-top { bottom: 84px; right: 21px; }
 }
+
+/* El antetítulo siempre va en dorado de marca. En fondos claros usa el dorado
+   accesible (#8a6508, contraste AA). Se eleva la especificidad a p.eyebrow para
+   ganar a reglas como ".split p"/".section-head p" que lo dejaban gris. En
+   fondos oscuros (.hero/.export/.stats-band) gana el dorado claro definido arriba. */
+p.eyebrow { color: var(--gold-text); }

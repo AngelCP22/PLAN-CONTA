@@ -1,0 +1,56 @@
+# Despliegue automático del sitio Astro a GitHub Pages.
+#
+# IMPORTANTE — antes de usarlo:
+#   1. En GitHub: Settings → Pages → "Build and deployment" → Source = "GitHub Actions".
+#   2. (Recomendado) En astro-src/astro.config.mjs cambiar base a "/PLAN-CONTA" y
+#      outDir a "./dist" para obtener URLs limpias (sin "/astro-preview").
+#      Tras ese cambio puedes borrar la carpeta astro-preview/ y el index.html raíz de redirección.
+#
+# Mientras Pages siga en modo "Deploy from a branch", este workflow NO se ejecuta solo:
+# está configurado como manual (workflow_dispatch) para no generar ejecuciones fallidas.
+name: Deploy a GitHub Pages
+
+on:
+  workflow_dispatch:
+  # Descomenta para desplegar en cada push a main (requiere Pages en modo "GitHub Actions"):
+  # push:
+  #   branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: astro-src
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: astro-src/.nvmrc
+          cache: npm
+          cache-dependency-path: astro-src/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: astro-preview
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

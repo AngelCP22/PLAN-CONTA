@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, waLink } from "../data/site";
 
 const base = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
@@ -36,11 +37,14 @@ const plans = [
   },
 ];
 
+// Resultados anonimizados por la Ley N° 29733 (Protección de Datos Personales):
+// se describe el rubro del cliente en vez de su razón social / nombre. Si cuentas
+// con consentimiento escrito del cliente, puedes reemplazar por el nombre real.
 const results = [
-  ["Ingeodrilling SAC", "Conciliaciones y registros ordenados", "Se estructuró el flujo mensual de documentos para reducir reprocesos y mejorar la trazabilidad.", "Resultado: cierres mensuales más claros."],
-  ["Ingeniería Geología & Minería S.A.C.", "Compras y ventas con mejor sustento", "Se revisó la consistencia de comprobantes y registros para presentar información más confiable.", "Resultado: menor exposición a observaciones."],
-  ["Ingeotecnia SAC", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Resultado: calendario tributario siempre visible."],
-  ["Cayotopa Cuba Sergio", "Información centralizada para consultas", "Se concentró la documentación clave para facilitar declaraciones, respuestas y control interno.", "Resultado: soporte documentario disponible."],
+  ["Empresa de perforación geotécnica", "Conciliaciones y registros ordenados", "Se estructuró el flujo mensual de documentos para reducir reprocesos y mejorar la trazabilidad.", "Resultado: cierres mensuales más claros."],
+  ["Consultora de geología y minería", "Compras y ventas con mejor sustento", "Se revisó la consistencia de comprobantes y registros para presentar información más confiable.", "Resultado: menor exposición a observaciones."],
+  ["Empresa de ingeniería geotécnica", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Resultado: calendario tributario siempre visible."],
+  ["Profesional independiente (sector minero)", "Información centralizada para consultas", "Se concentró la documentación clave para facilitar declaraciones, respuestas y control interno.", "Resultado: soporte documentario disponible."],
 ];
 
 const stats = [
@@ -65,9 +69,13 @@ const serviceOptions = [
 
 <BaseLayout>
   <Header />
-  <main>
+  <main id="contenido" tabindex="-1">
     <section class="hero" id="inicio">
-      <div class="hero-bg" style={`background-image: linear-gradient(90deg, rgba(6,20,38,.96), rgba(6,20,38,.78), rgba(6,20,38,.42)), url('${base}assets/hero-bg.png');`} aria-hidden="true"></div>
+      <picture class="hero-bg" aria-hidden="true">
+        <source srcset={`${base}assets/hero-bg.webp`} type="image/webp" />
+        <img src={`${base}assets/hero-bg.jpg`} alt="" width="1600" height="1000" fetchpriority="high" decoding="async" />
+      </picture>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal-card from-left">
           <p class="eyebrow">Asesoría empresarial estratégica</p>
@@ -97,14 +105,13 @@ const serviceOptions = [
     </section>
 
     <section class="section" id="nosotros">
-      <span class="anchor-target" id="propositos"></span>
       <div class="container split">
         <div class="reveal-card from-left">
           <p class="eyebrow">Quiénes somos</p>
           <h2>Tu aliado estratégico empresarial.</h2>
           <p>En M&R Asociados ordenamos la información contable, tributaria y laboral para que tu empresa tenga claridad, cumpla a tiempo y reduzca riesgos.</p>
         </div>
-        <div class="feature-grid reveal-sequence">
+        <div class="feature-grid reveal-sequence" id="propositos">
           <article class="reveal-card from-bottom"><span>01</span><strong>Cálculos exactos</strong></article>
           <article class="reveal-card from-bottom"><span>02</span><strong>Cumplimiento normativo</strong></article>
           <article class="reveal-card from-bottom"><span>03</span><strong>Claridad financiera</strong></article>
@@ -199,21 +206,21 @@ const serviceOptions = [
           <p class="eyebrow">Contacto</p>
           <h2>¿Listo para ordenar tu gestión contable y tributaria?</h2>
           <p>Escríbenos y solicita una asesoría para revisar la situación actual de tu empresa. Te respondemos por WhatsApp.</p>
-          <div class="contact-pills"><a href="tel:+51956308249">+51 956-308-249</a><span>Lima, Perú</span></div>
+          <div class="contact-pills"><a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a><span>{site.ciudad}</span></div>
         </div>
         <form data-whatsapp-form novalidate>
           <label class="sr-only" for="contacto-nombre">Nombre</label>
-          <input id="contacto-nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required />
+          <input id="contacto-nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" aria-describedby="contacto-error" required />
           <label class="sr-only" for="contacto-telefono">Número de WhatsApp</label>
-          <input id="contacto-telefono" name="telefono" type="tel" placeholder="Tu número de WhatsApp" autocomplete="tel" inputmode="tel" required />
+          <input id="contacto-telefono" name="telefono" type="tel" placeholder="Tu WhatsApp (9 dígitos)" autocomplete="tel" inputmode="numeric" pattern="9[0-9]{8}" maxlength="9" aria-describedby="contacto-error" required />
           <label class="sr-only" for="contacto-servicio">Servicio de interés</label>
-          <select id="contacto-servicio" name="servicio" required>
+          <select id="contacto-servicio" name="servicio" aria-describedby="contacto-error" required>
             <option value="" disabled selected>¿Qué servicio necesitas?</option>
             {serviceOptions.map((option) => <option value={option}>{option}</option>)}
           </select>
           <label class="sr-only" for="contacto-mensaje">Mensaje</label>
           <textarea id="contacto-mensaje" name="mensaje" rows="3" placeholder="Cuéntanos brevemente tu caso (opcional)"></textarea>
-          <p class="form-error" data-form-error hidden>Completa tu nombre, tu WhatsApp y el servicio que necesitas.</p>
+          <p class="form-error" id="contacto-error" role="alert" aria-live="assertive" data-form-error hidden>Completa tu nombre, tu WhatsApp (9 dígitos) y el servicio que necesitas.</p>
           <button class="button gold" type="submit">Enviar por WhatsApp</button>
         </form>
       </div>
@@ -246,12 +253,12 @@ const serviceOptions = [
         <span><strong>M&amp;R Asociados</strong><small>Gestión contable, tributaria y laboral</small></span>
       </a>
       <div class="reveal-card from-bottom"><strong>Servicios</strong><a href="#servicios">Gestión contable</a><a href="#exportacion">Drawback y exportación</a><a href="#planes">Planes</a></div>
-      <div class="reveal-card from-bottom"><strong>Contacto</strong><a href="tel:+51956308249">956-308-249</a><a href="https://wa.me/51956308249" target="_blank" rel="noopener noreferrer">WhatsApp directo</a></div>
+      <div class="reveal-card from-bottom"><strong>Contacto</strong><a href={`tel:${site.telefonoTel}`}>956-308-249</a><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp directo</a></div>
     </div>
-    <div class="container footer-bottom"><span>© {year} M&amp;R Asociados. Todos los derechos reservados.</span><span>Lima, Perú · Atención a empresas de todo el país.</span></div>
+    <div class="container footer-bottom"><span>© {year} M&amp;R Asociados. Todos los derechos reservados.</span><span><a href={`${base}privacidad/`}>Política de privacidad</a> · {site.ciudad} · Atención a empresas de todo el país.</span></div>
   </footer>
 
-  <a class="wa-float" href="https://wa.me/51956308249?text=Hola%20M%26R%20Asociados%2C%20quiero%20solicitar%20una%20asesor%C3%ADa" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+  <a class="wa-float" href={waLink()} target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
     <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M16.04 4.5c-6.35 0-11.5 5.08-11.5 11.34 0 2 .53 3.95 1.55 5.67L4.5 27.5l6.18-1.6a11.66 11.66 0 0 0 5.36 1.3c6.35 0 11.5-5.08 11.5-11.35 0-3.03-1.2-5.88-3.37-8.02a11.56 11.56 0 0 0-8.13-3.33Zm0 2.17c2.5 0 4.84.96 6.6 2.7a9.02 9.02 0 0 1 2.74 6.48c0 5.06-4.2 9.18-9.34 9.18-1.6 0-3.17-.4-4.55-1.18l-.5-.28-3.67.95.98-3.52-.32-.52a9.04 9.04 0 0 1-1.4-4.86c0-5.06 4.2-9.18 9.34-9.18Zm-4.1 4.4c-.2 0-.5.07-.77.36-.26.3-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.14.19 2 3.16 4.93 4.3 2.44.95 2.94.76 3.47.71.53-.05 1.7-.69 1.94-1.36.24-.66.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33-.29-.14-1.7-.83-1.96-.92-.26-.1-.46-.15-.65.14-.19.29-.74.92-.9 1.1-.17.2-.34.22-.62.08a7.84 7.84 0 0 1-2.31-1.41 8.55 8.55 0 0 1-1.6-1.97c-.17-.29-.02-.44.13-.58.13-.13.28-.34.43-.5.14-.18.19-.3.29-.5.1-.18.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.47-.49-.65-.5l-.62-.02Z"/></svg>
   </a>
 

@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const base = import.meta.env.BASE_URL;
+const actualizado = "26 de junio de 2026";
+---
+
+<BaseLayout
+  title={`Política de privacidad | ${site.nombre}`}
+  description={`Política de privacidad y tratamiento de datos personales de ${site.nombre} conforme a la Ley N° 29733 del Perú.`}
+>
+  <header class="site-header" data-header>
+    <div class="container nav">
+      <a class="brand" href={base} aria-label="Ir al inicio">
+        <img src={`${base}assets/logo-mark.png`} alt={`Logo ${site.nombre}`} width="42" height="42" />
+        <span><strong>M&amp;R Asociados</strong><small>Gestión contable, tributaria y laboral</small></span>
+      </a>
+      <a class="button gold" href={base}>Volver al inicio</a>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1" class="section">
+    <div class="container prose">
+      <p class="eyebrow">Legal</p>
+      <h1>Política de privacidad</h1>
+      <p class="muted">Última actualización: {actualizado}</p>
+
+      <p>
+        En {site.nombre} respetamos tu privacidad. Esta política explica qué datos personales
+        tratamos cuando usas este sitio web y cómo lo hacemos, conforme a la
+        <strong>Ley N° 29733 — Ley de Protección de Datos Personales del Perú</strong> y su reglamento.
+      </p>
+
+      <h2>1. Responsable del tratamiento</h2>
+      <p>
+        {site.nombre}, con atención en {site.ciudad}. Puedes contactarnos por WhatsApp o teléfono al
+        <a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a>.
+      </p>
+
+      <h2>2. Qué datos recogemos</h2>
+      <p>Solo los que tú nos proporcionas voluntariamente en el formulario de contacto:</p>
+      <ul>
+        <li>Nombre.</li>
+        <li>Número de WhatsApp / teléfono.</li>
+        <li>Servicio de interés.</li>
+        <li>Mensaje (opcional).</li>
+      </ul>
+      <p>El sitio no usa cookies de seguimiento ni crea perfiles de los visitantes.</p>
+
+      <h2>3. Finalidad</h2>
+      <p>
+        Usamos tus datos únicamente para atender tu consulta y contactarte para brindarte
+        información o asesoría sobre nuestros servicios. <strong>No vendemos ni cedemos tus datos</strong>
+        a terceros con fines comerciales.
+      </p>
+
+      <h2>4. Cómo se envía tu consulta</h2>
+      <p>
+        El formulario de contacto abre <strong>WhatsApp</strong> con tu mensaje. Al enviarlo, tus datos
+        se transmiten a través de WhatsApp (Meta Platforms, Inc.), sujeto a las políticas de privacidad
+        de ese servicio. Si prefieres no usar WhatsApp, puedes llamarnos directamente.
+      </p>
+
+      <h2>5. Servicios de terceros</h2>
+      <ul>
+        <li><strong>Google Fonts:</strong> el sitio carga tipografías desde los servidores de Google, que
+          puede recibir tu dirección IP al renderizar la página.</li>
+        <li><strong>GitHub Pages:</strong> el sitio está alojado en GitHub Pages, que procesa los datos
+          técnicos habituales de cualquier servidor web (p. ej. la IP de conexión).</li>
+      </ul>
+
+      <h2>6. Conservación</h2>
+      <p>
+        Conservamos los mensajes recibidos el tiempo necesario para atender tu consulta y darte
+        seguimiento como cliente o prospecto.
+      </p>
+
+      <h2>7. Tus derechos</h2>
+      <p>
+        Puedes ejercer tus derechos de <strong>acceso, rectificación, cancelación y oposición (ARCO)</strong>
+        sobre tus datos personales escribiéndonos a nuestro WhatsApp o llamando al
+        <a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a>.
+      </p>
+
+      <h2>8. Cambios en esta política</h2>
+      <p>
+        Podemos actualizar esta política para reflejar cambios en el sitio o en la normativa. La versión
+        vigente siempre estará publicada en esta página.
+      </p>
+
+      <p class="back"><a href={base}>← Volver al inicio</a></p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <span>© {new Date().getFullYear()} {site.nombre}. Todos los derechos reservados.</span>
+      <a href={base}>Inicio</a>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .prose { max-width: 72ch; }
+  .prose h1 { margin: 10px 0 6px; }
+  .prose h2 { font-size: 1.4rem; margin: 34px 0 10px; }
+  .prose p, .prose li { color: var(--ink); }
+  .prose .muted { color: var(--muted); margin-bottom: 18px; }
+  .prose ul { display: grid; gap: 8px; margin: 8px 0 0; padding-left: 22px; }
+  .prose a { color: var(--gold-text); font-weight: 700; text-decoration: underline; }
+  .prose .back { margin-top: 36px; }
+  .footer .footer-bottom a { color: rgba(255,255,255,.78); }
+</style>

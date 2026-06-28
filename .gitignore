@@ -1,2 +1,3 @@
 astro-src/node_modules/
 .astro/
+astro-src/dist/

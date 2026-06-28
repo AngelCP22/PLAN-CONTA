@@ -1,5 +1,8 @@
 ---
-const navItems = [
+import { site, waLink } from "../data/site";
+
+const base = import.meta.env.BASE_URL;
+const navItems: [string, string][] = [
   ["Nosotros", "#nosotros"],
   ["Propósitos", "#propositos"],
   ["Proceso", "#proceso"],
@@ -14,7 +17,7 @@ const navItems = [
 <header class="site-header" data-header>
   <div class="container nav">
     <a class="brand" href="#inicio" aria-label="Ir al inicio">
-      <img src={`${import.meta.env.BASE_URL}assets/logo-mark.png`} alt="Logo M&R Asociados" width="42" height="42" />
+      <img src={`${base}assets/logo-mark.png`} alt={`Logo ${site.nombre}`} width="42" height="42" />
       <span>
         <strong>M&amp;R Asociados</strong>
         <small>Gestión contable, tributaria y laboral</small>
@@ -25,7 +28,7 @@ const navItems = [
     </button>
     <nav class="menu" id="menu-principal" aria-label="Navegación principal" data-menu>
       {navItems.map(([label, href]) => <a href={href} data-nav-link>{label}</a>)}
-      <a class="button gold" href="https://wa.me/51956308249?text=Hola%20M%26R%20Asociados%2C%20quiero%20solicitar%20una%20asesor%C3%ADa" target="_blank" rel="noopener noreferrer">Solicitar asesoría</a>
+      <a class="button gold" href={waLink()} target="_blank" rel="noopener noreferrer">Solicitar asesoría</a>
     </nav>
   </div>
 </header>

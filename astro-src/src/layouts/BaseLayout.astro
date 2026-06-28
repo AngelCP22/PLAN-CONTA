@@ -1,12 +1,15 @@
 ---
 import "../styles/global.css";
+import { site as siteData } from "../data/site";
 
 const {
-  title = "M&R Asociados | Gestión contable, tributaria y laboral",
-  description = "M&R Asociados brinda gestión contable, tributaria, laboral, drawback y contabilidad para exportadores en Perú.",
+  title = `${siteData.nombre} | Gestión contable, tributaria y laboral`,
+  description = siteData.descripcion,
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const ogImage = new URL(`${import.meta.env.BASE_URL}assets/hero-bg.png`, Astro.site).toString();
+const ogImage = new URL(`${base}assets/og-image.jpg`, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -14,200 +17,90 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}assets/hero-bg.png`, Astro.s
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+    />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#061426" />
     <link rel="canonical" href={canonical} />
+
+    {/* Open Graph + Twitter para vistas previas en redes */}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_PE" />
-    <link rel="icon" href={`${import.meta.env.BASE_URL}assets/logo-mark.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href={`${base}assets/logo-mark.png`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* Activa las animaciones solo si hay JS; sin JS el contenido es visible. */}
     <script is:inline>document.documentElement.classList.add("is-enhanced");</script>
+
+    {/* Datos estructurados de negocio local para buscadores */}
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "AccountingService",
-      name: "M&R Asociados",
+      name: siteData.nombre,
       areaServed: "Perú",
-      telephone: "+51 956-308-249",
+      telephone: siteData.telefonoDisplay,
       url: canonical,
+      image: ogImage,
       serviceType: [
         "Gestión contable",
         "Gestión tributaria",
         "Gestión laboral",
         "Drawback",
-        "Contabilidad para exportadores"
+        "Contabilidad para exportadores",
       ],
     })} />
   </head>
   <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <slot />
+
     <script>
-      // --- Menú móvil ---
-      const button = document.querySelector("[data-menu-button]");
-      const menu = document.querySelector("[data-menu]");
-      const setMenu = (open) => {
-        if (!menu || !button) return;
-        menu.classList.toggle("open", open);
-        button.setAttribute("aria-expanded", String(open));
-        button.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
-      };
-      button?.addEventListener("click", (event) => {
-        event.stopPropagation();
-        setMenu(!menu?.classList.contains("open"));
-      });
-      menu?.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => setMenu(false));
-      });
-      document.addEventListener("click", (event) => {
-        if (!menu?.classList.contains("open")) return;
-        if (event.target instanceof Node && !menu.contains(event.target)) setMenu(false);
-      });
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") setMenu(false);
-      });
+      import { initMenu } from "../scripts/menu";
+      import { initHeaderShadow } from "../scripts/header-shadow";
+      import { initScrollspy } from "../scripts/scrollspy";
+      import { initWhatsappForms } from "../scripts/whatsapp-form";
+      import { initToTop } from "../scripts/to-top";
+      import { initLimaClock } from "../scripts/lima-clock";
+      import { initReveal } from "../scripts/reveal";
 
-      // --- Sombra del header al hacer scroll ---
-      const header = document.querySelector("[data-header]");
-      const onScrollHeader = () => header?.classList.toggle("scrolled", window.scrollY > 12);
-      onScrollHeader();
-      window.addEventListener("scroll", onScrollHeader, { passive: true });
-
-      // --- Enlace activo según la sección visible (scrollspy) ---
-      const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
-      const sectionForLink = new Map();
-      navLinks.forEach((link) => {
-        const id = (link.getAttribute("href") || "").slice(1);
-        const target = id && document.getElementById(id);
-        if (target) sectionForLink.set(target.closest("section") || target, link);
-      });
-      if (sectionForLink.size) {
-        const spyObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            const link = sectionForLink.get(entry.target);
-            if (!link) return;
-            if (entry.isIntersecting) {
-              navLinks.forEach((other) => other.classList.remove("active"));
-              link.classList.add("active");
-            }
-          });
-        }, { rootMargin: "-40% 0px -55% 0px" });
-        sectionForLink.forEach((_link, section) => spyObserver.observe(section));
-      }
-
-      // --- Formulario hacia WhatsApp ---
-      document.querySelectorAll("[data-whatsapp-form]").forEach((form) => {
-        const errorNode = form.querySelector("[data-form-error]");
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const data = new FormData(form);
-          const nombre = String(data.get("nombre") || "").trim();
-          const telefono = String(data.get("telefono") || "").trim();
-          const servicio = String(data.get("servicio") || "").trim();
-          const detalle = String(data.get("mensaje") || "").trim();
-          if (!nombre || !telefono || !servicio) {
-            if (errorNode) errorNode.hidden = false;
-            return;
-          }
-          if (errorNode) errorNode.hidden = true;
-          const lineas = [
-            "Hola M&R Asociados, quiero información.",
-            "",
-            `Nombre: ${nombre}`,
-            `WhatsApp: ${telefono}`,
-            `Servicio: ${servicio}`,
-          ];
-          if (detalle) lineas.push(`Mensaje: ${detalle}`);
-          const mensaje = encodeURIComponent(lineas.join("\n"));
-          window.open(`https://wa.me/51956308249?text=${mensaje}`, "_blank", "noopener,noreferrer");
-          const submit = form.querySelector("button[type=submit]");
-          if (submit) {
-            const original = submit.textContent;
-            submit.textContent = "¡Abriendo WhatsApp!";
-            submit.disabled = true;
-            setTimeout(() => {
-              submit.textContent = original;
-              submit.disabled = false;
-            }, 2600);
-          }
-        });
-      });
-
-      // --- Botón volver arriba ---
-      const toTop = document.querySelector("[data-to-top]");
-      const onScrollTop = () => toTop?.classList.toggle("show", window.scrollY > 600);
-      onScrollTop();
-      window.addEventListener("scroll", onScrollTop, { passive: true });
-      toTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-      // --- Reloj y fecha de Lima ---
-      const clockNode = document.querySelector("[data-clock]");
-      const weekdayNode = document.querySelector("[data-weekday]");
-      const dateNode = document.querySelector("[data-date]");
-      const updateCalendar = () => {
-        const now = new Date();
-        const time = new Intl.DateTimeFormat("es-PE", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-          timeZone: "America/Lima",
-        }).format(now);
-        const weekday = new Intl.DateTimeFormat("es-PE", {
-          weekday: "long",
-          timeZone: "America/Lima",
-        }).format(now);
-        if (clockNode) clockNode.textContent = time;
-        if (weekdayNode) weekdayNode.textContent = weekday;
-        if (dateNode) {
-          dateNode.textContent = new Intl.DateTimeFormat("es-PE", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            timeZone: "America/Lima",
-          }).format(now);
+      // Cada característica se inicializa de forma aislada: si una falla, las
+      // demás siguen funcionando y el contenido nunca queda oculto.
+      const safe = (fn: () => void) => {
+        try {
+          fn();
+        } catch (error) {
+          console.error("[M&R] init falló:", error);
         }
       };
-      updateCalendar();
-      setInterval(updateCalendar, 30000);
 
-      // --- Animaciones de aparición y contadores ---
-      const canAnimate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const revealNodes = document.querySelectorAll(".reveal-card");
-      if (!canAnimate) {
-        revealNodes.forEach((node) => node.classList.add("is-visible"));
-      } else {
-        const revealObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              entry.target.querySelectorAll("[data-count]").forEach((node) => {
-                if (node.dataset.animated === "true") return;
-                node.dataset.animated = "true";
-                const raw = node.getAttribute("data-count") || "";
-                const numeric = Number(raw.replace(/\D/g, ""));
-                const suffix = raw.replace(/[0-9]/g, "");
-                if (!numeric) return;
-                const duration = 900;
-                const start = performance.now();
-                const tick = (time) => {
-                  const progress = Math.min((time - start) / duration, 1);
-                  const eased = 1 - Math.pow(1 - progress, 3);
-                  node.textContent = `${Math.round(numeric * eased)}${suffix}`;
-                  if (progress < 1) requestAnimationFrame(tick);
-                };
-                requestAnimationFrame(tick);
-              });
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.18 });
-        revealNodes.forEach((node) => revealObserver.observe(node));
-      }
+      safe(initReveal); // primero: garantiza que el contenido se muestre
+      safe(initMenu);
+      safe(initHeaderShadow);
+      safe(initScrollspy);
+      safe(initWhatsappForms);
+      safe(initToTop);
+      safe(initLimaClock);
     </script>
   </body>
 </html>
