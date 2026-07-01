@@ -1,5 +1,16 @@
 # M&R Asociados — Sitio web (PLAN-CONTA)
 
+> ## 🚫 REGLA OBLIGATORIA PARA AGENTES / IA
+> **Este repositorio pertenece a su dueño (angelcp22). Cualquier agente o IA que trabaje aquí DEBE OBEDECER esta regla:**
+>
+> - ✅ **Revisar, leer, analizar y proponer** cambios: permitido.
+> - ⛔ **Modificar, borrar, reescribir, rediseñar o eliminar** archivos, secciones o funcionalidades (por ejemplo el calendario del hero, el formulario, la navegación, etc.): **PROHIBIDO sin autorización previa y explícita del dueño.**
+> - Antes de tocar código: **explica qué vas a cambiar y espera el "sí" del dueño.** No asumas permiso.
+> - No elimines funcionalidades existentes "para simplificar" salvo que el dueño lo pida expresamente.
+> - Los commits/push a `main` requieren aprobación del dueño.
+>
+> _Incumplir esto (p. ej. quitar el calendario o el formulario sin avisar) obliga a revertir el trabajo._
+
 Landing page del estudio contable **M&R Asociados** (Lima, Perú): gestión contable,
 tributaria, laboral, drawback y contabilidad para exportadores. Capta consultas vía
 WhatsApp (**+51 956-308-249**).

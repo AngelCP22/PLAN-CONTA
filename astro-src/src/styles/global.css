@@ -74,7 +74,16 @@ button, input, select, textarea { font: inherit; }
 .hero-overlay { background: linear-gradient(90deg, rgba(6,20,38,.96), rgba(6,20,38,.78), rgba(6,20,38,.42)); inset: 0; position: absolute; }
 html.is-enhanced .hero-bg img { animation: hero-zoom 16s ease-out forwards; }
 @keyframes hero-zoom { from { transform: scale(1.07); } to { transform: scale(1); } }
-.hero-grid { align-items: center; display: grid; gap: 44px; grid-template-columns: 1fr; position: relative; z-index: 1; }
+.hero-grid { align-items: center; display: grid; gap: 44px; grid-template-columns: 1.08fr .72fr; position: relative; z-index: 1; }
+.calendar-panel { background: linear-gradient(180deg, rgba(17,54,86,.94), rgba(104,132,154,.9)); border: 1px solid rgba(255,255,255,.16); border-radius: 28px; box-shadow: 0 24px 70px rgba(6,20,38,.18); overflow: hidden; padding: 30px; position: relative; }
+.calendar-panel::before { background: radial-gradient(circle, rgba(214,162,31,.28), transparent 58%); content: ""; height: 220px; position: absolute; right: -90px; top: -90px; width: 220px; }
+.calendar-top, .calendar-date { position: relative; z-index: 1; }
+.calendar-top { align-items: center; display: flex; gap: 14px; justify-content: space-between; margin-bottom: 26px; }
+.calendar-top span { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: #fff; font-size: .76rem; font-weight: 900; padding: 10px 14px; text-transform: uppercase; }
+.calendar-top strong { color: #fff; font-size: 1.1rem; white-space: nowrap; }
+.calendar-date { align-items: center; background: rgba(255,255,255,.12); border-radius: 22px; display: grid; gap: 12px; margin: 0; padding: 34px 24px; text-align: center; }
+.calendar-date span { color: rgba(255,255,255,.88); font-size: .95rem; font-weight: 900; text-transform: uppercase; }
+.calendar-date strong { color: #fff; font-size: clamp(2.2rem, 3vw, 3.2rem); font-weight: 900; line-height: 1; }
 .eyebrow { color: var(--gold-text); font-size: .78rem; font-weight: 900; margin: 0 0 12px; text-transform: uppercase; }
 /* Sobre fondos oscuros el dorado claro sí contrasta bien */
 .hero .eyebrow, .export .eyebrow, .stats-band .eyebrow { color: var(--gold-2); }
@@ -236,7 +245,9 @@ html.is-enhanced .impact-grid article.reveal-card.is-visible:hover { transform: 
   .actions .button { width: 100%; }
   .section { padding: 68px 0; scroll-margin-top: 92px; }
   .steps, .cards, .impact-grid, .stats-numbers { grid-template-columns: 1fr; }
-  .feature-grid article, .cards article, .steps article, .plan, .impact-grid article { padding: 22px; }
+  .feature-grid article, .cards article, .steps article, .plan, .impact-grid article, .calendar-panel { padding: 22px; }
+  .calendar-top { align-items: flex-start; flex-direction: column; }
+  .calendar-date { padding: 22px; }
   .contact-card { padding: 32px 22px; }
   .stats-band { padding: 68px 0; }
   .stats-numbers article:first-child { grid-row: auto; }

@@ -96,6 +96,7 @@ const csp = [
       import { initHeaderShadow } from "../scripts/header-shadow";
       import { initScrollspy } from "../scripts/scrollspy";
       import { initToTop } from "../scripts/to-top";
+      import { initLimaClock } from "../scripts/lima-clock";
       import { initReveal } from "../scripts/reveal";
 
       // Cada característica se inicializa de forma aislada: si una falla, las
@@ -113,6 +114,7 @@ const csp = [
       safe(initHeaderShadow);
       safe(initScrollspy);
       safe(initToTop);
+      safe(initLimaClock);
     </script>
 
     {/* Chatbot de IA (ChatSimple / Expertise AI). Solo se inyecta cuando hay

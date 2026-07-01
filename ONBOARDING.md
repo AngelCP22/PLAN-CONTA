@@ -1,5 +1,8 @@
 # ONBOARDING / Traspaso — PLAN-CONTA (M&R Asociados)
 
+> ## 🚫 REGLA OBLIGATORIA PARA AGENTES / IA
+> Puedes **revisar y proponer**, pero **NO modificar, borrar ni rediseñar nada sin autorización previa y explícita del dueño (angelcp22)**. No elimines funcionalidades existentes (calendario, formulario, secciones, navegación) "para simplificar". Explica el cambio y espera el "sí" antes de tocar código. Commits/push a `main` requieren su aprobación. Ver la regla completa en `README.md`.
+
 > Estado al **2026-07-01**. Sitio del estudio contable M&R Asociados (Lima). Léelo antes de tocar nada.
 
 ## Rediseño 2026-07-01 (última sesión)
