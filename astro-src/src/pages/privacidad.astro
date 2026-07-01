@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
 
 const base = import.meta.env.BASE_URL;
-const actualizado = "26 de junio de 2026";
+const actualizado = "1 de julio de 2026";
 ---
 
 <BaseLayout
@@ -39,13 +39,11 @@ const actualizado = "26 de junio de 2026";
       </p>
 
       <h2>2. Qué datos recogemos</h2>
-      <p>Solo los que tú nos proporcionas voluntariamente en el formulario de contacto:</p>
-      <ul>
-        <li>Nombre.</li>
-        <li>Número de WhatsApp / teléfono.</li>
-        <li>Servicio de interés.</li>
-        <li>Mensaje (opcional).</li>
-      </ul>
+      <p>
+        Solo los que tú nos proporcionas voluntariamente cuando decides contactarnos por WhatsApp,
+        por teléfono o a través del chat del sitio: normalmente tu nombre, tu número de contacto y el
+        detalle de tu consulta.
+      </p>
       <p>El sitio no usa cookies de seguimiento ni crea perfiles de los visitantes.</p>
 
       <h2>3. Finalidad</h2>
@@ -57,7 +55,7 @@ const actualizado = "26 de junio de 2026";
 
       <h2>4. Cómo se envía tu consulta</h2>
       <p>
-        El formulario de contacto abre <strong>WhatsApp</strong> con tu mensaje. Al enviarlo, tus datos
+        El botón de contacto abre <strong>WhatsApp</strong> con un mensaje inicial. Al enviarlo, tus datos
         se transmiten a través de WhatsApp (Meta Platforms, Inc.), sujeto a las políticas de privacidad
         de ese servicio. Si prefieres no usar WhatsApp, puedes llamarnos directamente.
       </p>
@@ -68,6 +66,9 @@ const actualizado = "26 de junio de 2026";
           puede recibir tu dirección IP al renderizar la página.</li>
         <li><strong>GitHub Pages:</strong> el sitio está alojado en GitHub Pages, que procesa los datos
           técnicos habituales de cualquier servidor web (p. ej. la IP de conexión).</li>
+        <li><strong>Chat de IA (ChatSimple / Expertise AI):</strong> cuando el chat en vivo está activo, un
+          proveedor externo procesa los mensajes que escribes en la ventana de chat para responder tus
+          consultas. Solo se activa si abres y usas esa ventana; si no la usas, no se le envían datos.</li>
       </ul>
 
       <h2>6. Conservación</h2>

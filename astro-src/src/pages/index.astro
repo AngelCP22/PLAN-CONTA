@@ -7,12 +7,10 @@ const base = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
 
 const services = [
-  ["Gestión contable", "Registro de operaciones, conciliaciones, análisis de cuentas y estados financieros."],
-  ["Gestión tributaria", "Declaraciones de IGV y renta, libros electrónicos y seguimiento de obligaciones ante SUNAT."],
-  ["Gestión laboral", "Altas, bajas, planillas, beneficios sociales y soporte documental laboral."],
-  ["Drawback", "Revisión de requisitos, DAM/DUA, compras vinculadas y sustento para tus solicitudes."],
-  ["Exportadores", "Saldo a favor del exportador, PDB Exportadores y control documentario de comercio exterior."],
-  ["Reportes de gestión", "Información clara para revisar obligaciones, gastos, riesgos y prioridades."],
+  ["Gestión contable", "Registro de operaciones, conciliaciones, análisis de cuentas y estados financieros claros.", "contable"],
+  ["Gestión laboral", "Altas, bajas, planillas, beneficios sociales y soporte documental laboral.", "laboral"],
+  ["Gestión tributaria", "Declaraciones de IGV y renta, libros electrónicos y seguimiento de obligaciones ante SUNAT.", "tributaria"],
+  ["Comercio exterior", "Drawback, saldo a favor del exportador y control documentario para tus operaciones de exportación.", "comercio"],
 ];
 
 const plans = [
@@ -54,17 +52,6 @@ const stats = [
   ["9", "áreas de servicio"],
   ["371", "procesos estructurados"],
 ];
-
-const serviceOptions = [
-  "Gestión contable",
-  "Gestión tributaria",
-  "Gestión laboral",
-  "Drawback y exportación",
-  "Reportes de gestión",
-  "Plan Emprende",
-  "Plan Negocio",
-  "Plan Premium",
-];
 ---
 
 <BaseLayout>
@@ -79,7 +66,7 @@ const serviceOptions = [
       <div class="container hero-grid">
         <div class="hero-copy reveal-card from-left">
           <p class="eyebrow">Asesoría empresarial estratégica</p>
-          <h1>Soluciones <span class="accent">contables y tributarias</span> para tu empresa</h1>
+          <h1>Soluciones contables y tributarias para tu empresa</h1>
           <p>Ordenamos tu información contable, cumplimos tus obligaciones a tiempo y te damos números claros para tomar mejores decisiones.</p>
           <div class="actions">
             <a class="button gold" href="#contacto">Solicitar asesoría</a>
@@ -91,16 +78,6 @@ const serviceOptions = [
             <li>Exportadores y drawback</li>
           </ul>
         </div>
-        <aside class="calendar-panel reveal-card from-right">
-          <div class="calendar-top">
-            <span>Calendario tributario</span>
-            <strong data-clock>--:--</strong>
-          </div>
-          <div class="calendar-date">
-            <span data-weekday>Actualizando</span>
-            <strong data-date>--/--/----</strong>
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -158,7 +135,17 @@ const serviceOptions = [
           <h2>Gestión integral para reducir riesgos y ordenar tu operación.</h2>
         </div>
         <div class="cards reveal-sequence">
-          {services.map(([title, text], index) => <article class:list={["reveal-card", index % 2 === 0 ? "from-bottom" : "from-right"]}><h3>{title}</h3><p>{text}</p></article>)}
+          {services.map(([title, text, img], index) => (
+            <article class:list={["service-card", "reveal-card", index % 2 === 0 ? "from-bottom" : "from-right"]}>
+              <div class="service-media">
+                <img src={`${base}assets/servicios/${img}.jpg`} alt={`${title} — M&R Asociados`} width="900" height="650" loading="lazy" decoding="async" />
+              </div>
+              <div class="service-body">
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -202,27 +189,14 @@ const serviceOptions = [
 
     <section class="section contact" id="contacto">
       <div class="container contact-card reveal-card from-bottom">
-        <div>
-          <p class="eyebrow">Contacto</p>
-          <h2>¿Listo para ordenar tu gestión contable y tributaria?</h2>
-          <p>Escríbenos y solicita una asesoría para revisar la situación actual de tu empresa. Te respondemos por WhatsApp.</p>
-          <div class="contact-pills"><a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a><span>{site.ciudad}</span></div>
-        </div>
-        <form data-whatsapp-form novalidate>
-          <label class="sr-only" for="contacto-nombre">Nombre</label>
-          <input id="contacto-nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" aria-describedby="contacto-error" required />
-          <label class="sr-only" for="contacto-telefono">Número de WhatsApp</label>
-          <input id="contacto-telefono" name="telefono" type="tel" placeholder="Tu WhatsApp (9 dígitos)" autocomplete="tel" inputmode="numeric" pattern="9[0-9]{8}" maxlength="9" aria-describedby="contacto-error" required />
-          <label class="sr-only" for="contacto-servicio">Servicio de interés</label>
-          <select id="contacto-servicio" name="servicio" aria-describedby="contacto-error" required>
-            <option value="" disabled selected>¿Qué servicio necesitas?</option>
-            {serviceOptions.map((option) => <option value={option}>{option}</option>)}
-          </select>
-          <label class="sr-only" for="contacto-mensaje">Mensaje</label>
-          <textarea id="contacto-mensaje" name="mensaje" rows="3" placeholder="Cuéntanos brevemente tu caso (opcional)"></textarea>
-          <p class="form-error" id="contacto-error" role="alert" aria-live="assertive" data-form-error hidden>Completa tu nombre, tu WhatsApp (9 dígitos) y el servicio que necesitas.</p>
-          <button class="button gold" type="submit">Enviar por WhatsApp</button>
-        </form>
+        <p class="eyebrow">Contacto</p>
+        <h2>¿Listo para ordenar tu gestión contable y tributaria?</h2>
+        <p>Escríbenos y solicita una asesoría para revisar la situación actual de tu empresa. Te respondemos por WhatsApp.</p>
+        <a class="button gold contact-cta" href={waLink()} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M16.04 4.5c-6.35 0-11.5 5.08-11.5 11.34 0 2 .53 3.95 1.55 5.67L4.5 27.5l6.18-1.6a11.66 11.66 0 0 0 5.36 1.3c6.35 0 11.5-5.08 11.5-11.35 0-3.03-1.2-5.88-3.37-8.02a11.56 11.56 0 0 0-8.13-3.33Zm0 2.17c2.5 0 4.84.96 6.6 2.7a9.02 9.02 0 0 1 2.74 6.48c0 5.06-4.2 9.18-9.34 9.18-1.6 0-3.17-.4-4.55-1.18l-.5-.28-3.67.95.98-3.52-.32-.52a9.04 9.04 0 0 1-1.4-4.86c0-5.06 4.2-9.18 9.34-9.18Zm-4.1 4.4c-.2 0-.5.07-.77.36-.26.3-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.14.19 2 3.16 4.93 4.3 2.44.95 2.94.76 3.47.71.53-.05 1.7-.69 1.94-1.36.24-.66.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33-.29-.14-1.7-.83-1.96-.92-.26-.1-.46-.15-.65.14-.19.29-.74.92-.9 1.1-.17.2-.34.22-.62.08a7.84 7.84 0 0 1-2.31-1.41 8.55 8.55 0 0 1-1.6-1.97c-.17-.29-.02-.44.13-.58.13-.13.28-.34.43-.5.14-.18.19-.3.29-.5.1-.18.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.47-.49-.65-.5l-.62-.02Z"/></svg>
+          Enviar por WhatsApp
+        </a>
+        <div class="contact-pills"><a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a><span>{site.ciudad}</span></div>
       </div>
     </section>
 

@@ -29,3 +29,31 @@ export const site = {
 export function waLink(texto: string = site.mensajeAsesoria): string {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`;
 }
+
+/**
+ * Chatbot de IA en vivo (ChatSimple / Expertise AI): el mismo tipo de widget que
+ * usa auditeris.com. Es un servicio de TERCEROS y de pago.
+ *
+ * CÓMO ACTIVARLO (una sola vez):
+ *  1. Crea una cuenta y un chatbot en https://www.chatsimple.ai (hoy expertise.ai).
+ *  2. En el panel, en la sección de instalación/embed, copia tu "co-id" y el id del
+ *     chatbot (aiChatbotId). Verifica también el src del loader (puede cambiar con
+ *     el rebrand a Expertise) y pégalos abajo.
+ *  3. Pon enabled: true.
+ *
+ * Mientras enabled sea false, NO se inyecta ningún script externo: el sitio queda
+ * igual que ahora, sin enviar datos del visitante a terceros. Al activarlo, el
+ * BaseLayout añade automáticamente los dominios del proveedor al Content-Security-Policy
+ * y la página /privacidad ya declara el uso del chatbot.
+ */
+export const chat = {
+  enabled: false,
+  /** src del loader que entrega el panel. Verifícalo antes de activar. */
+  loaderSrc: "https://cdn.chatsimple.ai/ai-loader.js",
+  /** Identificador de cuenta (co-id) del panel. */
+  coId: "",
+  /** Identificador del chatbot (aiChatbotId) del panel. */
+  chatbotId: "",
+  /** Dominios que el widget necesita cargar/conectar. Ajústalos si el panel indica otros. */
+  domains: ["https://*.chatsimple.ai", "https://*.expertise.ai"],
+} as const;

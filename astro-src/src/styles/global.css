@@ -74,7 +74,7 @@ button, input, select, textarea { font: inherit; }
 .hero-overlay { background: linear-gradient(90deg, rgba(6,20,38,.96), rgba(6,20,38,.78), rgba(6,20,38,.42)); inset: 0; position: absolute; }
 html.is-enhanced .hero-bg img { animation: hero-zoom 16s ease-out forwards; }
 @keyframes hero-zoom { from { transform: scale(1.07); } to { transform: scale(1); } }
-.hero-grid { align-items: center; display: grid; gap: 44px; grid-template-columns: 1.08fr .72fr; position: relative; z-index: 1; }
+.hero-grid { align-items: center; display: grid; gap: 44px; grid-template-columns: 1fr; position: relative; z-index: 1; }
 .eyebrow { color: var(--gold-text); font-size: .78rem; font-weight: 900; margin: 0 0 12px; text-transform: uppercase; }
 /* Sobre fondos oscuros el dorado claro sí contrasta bien */
 .hero .eyebrow, .export .eyebrow, .stats-band .eyebrow { color: var(--gold-2); }
@@ -88,15 +88,6 @@ p { line-height: 1.75; }
 .actions, .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 .chips { list-style: none; padding: 0; }
 .chips li { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: rgba(255,255,255,.86); font-weight: 800; padding: 10px 14px; }
-.calendar-panel { background: linear-gradient(180deg, rgba(17,54,86,.94), rgba(104,132,154,.9)); border: 1px solid rgba(255,255,255,.16); border-radius: 28px; box-shadow: 0 24px 70px rgba(6,20,38,.18); overflow: hidden; padding: 30px; position: relative; }
-.calendar-panel::before { background: radial-gradient(circle, rgba(214,162,31,.28), transparent 58%); content: ""; height: 220px; position: absolute; right: -90px; top: -90px; width: 220px; }
-.calendar-top, .calendar-date { position: relative; z-index: 1; }
-.calendar-top { align-items: center; display: flex; gap: 14px; justify-content: space-between; margin-bottom: 26px; }
-.calendar-top span { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: #fff; font-size: .76rem; font-weight: 900; padding: 10px 14px; text-transform: uppercase; }
-.calendar-top strong { color: #fff; font-size: 1.1rem; white-space: nowrap; }
-.calendar-date { align-items: center; background: rgba(255,255,255,.12); border-radius: 22px; display: grid; gap: 12px; margin: 0; padding: 34px 24px; text-align: center; }
-.calendar-date span { color: rgba(255,255,255,.88); font-size: .95rem; font-weight: 900; text-transform: uppercase; }
-.calendar-date strong { color: #fff; font-size: clamp(2.2rem, 3vw, 3.2rem); font-weight: 900; line-height: 1; }
 .feature-grid, .cards, .plan-grid, .impact-grid, .steps { display: grid; gap: 18px; }
 .feature-grid article, .cards article, .steps article, .plan, .impact-grid article { background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 18px 50px rgba(6,20,38,.08); padding: 24px; transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
 .feature-grid article:hover, .cards article:hover, .steps article:hover, .plan:hover, .impact-grid article:hover { border-color: rgba(184,137,9,.38); box-shadow: 0 28px 70px rgba(6,20,38,.12); transform: translateY(-4px); }
@@ -104,7 +95,7 @@ p { line-height: 1.75; }
 .section { padding: 92px 0; scroll-margin-top: 92px; }
 .anchor-target { display: block; height: 0; position: relative; top: -92px; }
 .light, .plans { background: var(--soft); }
-.split, .export-grid, .contact-card { align-items: center; display: grid; gap: 42px; grid-template-columns: .9fr 1.1fr; }
+.split, .export-grid { align-items: center; display: grid; gap: 42px; grid-template-columns: .9fr 1.1fr; }
 .feature-grid { grid-template-columns: repeat(2, 1fr); }
 .feature-grid span, .plan > span, .impact-grid span, .steps span { color: var(--gold); display: inline-block; font-weight: 900; text-transform: uppercase; transition: transform .25s ease; }
 .steps article:hover span, .feature-grid article:hover span { transform: scale(1.18); }
@@ -118,7 +109,13 @@ p { line-height: 1.75; }
 .export-cards article { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 24px; transition: background .25s ease, border-color .25s ease, transform .25s ease; }
 .export-cards article:hover { background: rgba(255,255,255,.12); border-color: rgba(214,162,31,.4); transform: translateY(-4px); }
 .export-cards p { color: rgba(255,255,255,.76); }
-.cards { grid-template-columns: repeat(3, 1fr); margin-top: 34px; }
+.cards { grid-template-columns: repeat(4, 1fr); margin-top: 34px; }
+.cards article.service-card { display: flex; flex-direction: column; overflow: hidden; padding: 0; }
+.service-media { aspect-ratio: 3 / 2; overflow: hidden; }
+.service-media img { height: 100%; object-fit: cover; transition: transform .5s ease; width: 100%; }
+.cards article.service-card:hover .service-media img { transform: scale(1.06); }
+.service-body { padding: 22px 24px 26px; }
+.service-body h3 { margin-bottom: 8px; }
 .plan-grid { align-items: stretch; grid-template-columns: repeat(3, 1fr); margin-top: 34px; }
 .plan { display: flex; flex-direction: column; min-height: 520px; }
 .plan.featured { border-color: rgba(184,137,9,.42); box-shadow: 0 28px 70px rgba(184,137,9,.18); transform: translateY(-12px); }
@@ -133,15 +130,11 @@ p { line-height: 1.75; }
 .impact-grid article { min-height: 310px; }
 .impact-grid strong { color: var(--navy-800); display: block; margin-top: 18px; }
 .contact { background: #fff; }
-.contact-card { border: 1px solid var(--line); border-radius: 28px; box-shadow: 0 18px 50px rgba(6,20,38,.08); padding: 32px; }
-.contact form { display: grid; gap: 14px; }
-.contact input, .contact select, .contact textarea { background: #fff; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); min-height: 52px; padding: 0 16px; transition: border-color .25s ease, box-shadow .25s ease; width: 100%; }
-.contact textarea { font-family: inherit; min-height: 96px; padding: 14px 16px; resize: vertical; }
-.contact input:focus, .contact select:focus, .contact textarea:focus { border-color: rgba(184,137,9,.55); box-shadow: 0 0 0 4px rgba(214,162,31,.14); outline: none; }
-.contact input::placeholder, .contact textarea::placeholder { color: var(--muted); }
-.form-error { background: rgba(190,40,40,.08); border-radius: 12px; color: #a23434; font-size: .9rem; font-weight: 700; margin: 0; padding: 10px 14px; }
-.contact button[type="submit"]:disabled { cursor: default; opacity: .75; }
-.contact-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.contact-card { border: 1px solid var(--line); border-radius: 28px; box-shadow: 0 18px 50px rgba(6,20,38,.08); margin-inline: auto; max-width: 760px; padding: 48px 40px; text-align: center; }
+.contact-card h2 { margin-inline: auto; }
+.contact-card > p:not(.eyebrow) { margin-inline: auto; max-width: 56ch; }
+.contact-cta { font-size: 1.05rem; gap: 10px; margin: 28px auto 4px; min-height: 58px; padding: 0 34px; }
+.contact-pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 22px; }
 .contact-pills a, .contact-pills span { background: rgba(8,26,48,.06); border-radius: 999px; color: var(--navy-800); font-weight: 900; padding: 12px 16px; transition: background .25s ease; }
 .contact-pills a:hover { background: rgba(184,137,9,.16); }
 .stats-band { background: var(--navy-950); color: #fff; overflow: hidden; padding: 92px 0; position: relative; }
@@ -243,9 +236,8 @@ html.is-enhanced .impact-grid article.reveal-card.is-visible:hover { transform: 
   .actions .button { width: 100%; }
   .section { padding: 68px 0; scroll-margin-top: 92px; }
   .steps, .cards, .impact-grid, .stats-numbers { grid-template-columns: 1fr; }
-  .calendar-panel, .feature-grid article, .cards article, .steps article, .plan, .impact-grid article, .contact-card { padding: 22px; }
-  .calendar-top { align-items: flex-start; flex-direction: column; }
-  .calendar-date { padding: 22px; }
+  .feature-grid article, .cards article, .steps article, .plan, .impact-grid article { padding: 22px; }
+  .contact-card { padding: 32px 22px; }
   .stats-band { padding: 68px 0; }
   .stats-numbers article:first-child { grid-row: auto; }
   .footer, .footer-grid, .footer-bottom { text-align: center; }

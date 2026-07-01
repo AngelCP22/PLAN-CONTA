@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { site as siteData } from "../data/site";
+import { site as siteData, chat } from "../data/site";
 
 const {
   title = `${siteData.nombre} | Gestión contable, tributaria y laboral`,
@@ -10,6 +10,25 @@ const {
 const base = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(`${base}assets/og-image.jpg`, Astro.site).toString();
+
+// El widget de chat de IA se activa solo si hay credenciales en site.ts.
+const chatOn = chat.enabled && chat.coId !== "" && chat.chatbotId !== "";
+// El CSP se mantiene estricto; solo cuando el chat está activo se añaden los
+// dominios del proveedor (script/img/frame) y sus websockets (connect).
+const chatHosts = chatOn ? chat.domains.join(" ") : "";
+const chatSockets = chatOn ? chat.domains.map((d) => d.replace("https://", "wss://")).join(" ") : "";
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline' ${chatHosts}`.trim(),
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  `img-src 'self' data: ${chatHosts}`.trim(),
+  `connect-src 'self' ${chatHosts} ${chatSockets}`.trim(),
+  `frame-src 'self' ${chatHosts}`.trim(),
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+].join("; ");
 ---
 
 <!doctype html>
@@ -19,10 +38,7 @@ const ogImage = new URL(`${base}assets/og-image.jpg`, Astro.site).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
-    />
+    <meta http-equiv="Content-Security-Policy" content={csp} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#061426" />
@@ -79,9 +95,7 @@ const ogImage = new URL(`${base}assets/og-image.jpg`, Astro.site).toString();
       import { initMenu } from "../scripts/menu";
       import { initHeaderShadow } from "../scripts/header-shadow";
       import { initScrollspy } from "../scripts/scrollspy";
-      import { initWhatsappForms } from "../scripts/whatsapp-form";
       import { initToTop } from "../scripts/to-top";
-      import { initLimaClock } from "../scripts/lima-clock";
       import { initReveal } from "../scripts/reveal";
 
       // Cada característica se inicializa de forma aislada: si una falla, las
@@ -98,9 +112,20 @@ const ogImage = new URL(`${base}assets/og-image.jpg`, Astro.site).toString();
       safe(initMenu);
       safe(initHeaderShadow);
       safe(initScrollspy);
-      safe(initWhatsappForms);
       safe(initToTop);
-      safe(initLimaClock);
     </script>
+
+    {/* Chatbot de IA (ChatSimple / Expertise AI). Solo se inyecta cuando hay
+        credenciales en site.ts; ver instrucciones de activación ahí. */}
+    {chatOn && (
+      <script
+        is:inline
+        src={chat.loaderSrc}
+        co-id={chat.coId}
+        aiChatbotId={chat.chatbotId}
+        is-local="false"
+        defer
+      />
+    )}
   </body>
 </html>

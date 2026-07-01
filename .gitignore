@@ -1,3 +1,5 @@
 astro-src/node_modules/
 .astro/
 astro-src/dist/
+astro-preview/data-store.json
+astro-preview/settings.json

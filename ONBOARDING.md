@@ -1,8 +1,19 @@
 # ONBOARDING / Traspaso — PLAN-CONTA (M&R Asociados)
 
-> Estado al **2026-06-26**. Sitio del estudio contable M&R Asociados (Lima). Léelo antes de tocar nada.
+> Estado al **2026-07-01**. Sitio del estudio contable M&R Asociados (Lima). Léelo antes de tocar nada.
 
-## Qué pasó en esta sesión (cambio grande)
+## Rediseño 2026-07-01 (última sesión)
+
+Cambios de diseño pedidos por Ed, todos sobre `astro-src/` y verificados en el dev server + `npm run build`:
+
+- **Hero:** el título ahora es **todo blanco** (se quitó el `<span class="accent">` dorado). El **panel de "Calendario tributario"** se eliminó del hero → hero a una sola columna. Se borró el script `scripts/lima-clock.ts` (ya no se usa).
+- **Menú:** reducido a **4 ítems** → Nosotros · Servicios · Planes · Contacto (en `components/Header.astro`). Las secciones `#proceso`, `#exportacion` y `#resultados` **siguen existiendo** en la página (se llega por scroll), solo salieron del nav. Si Ed quiere, se pueden recortar también.
+- **Servicios:** ahora **4 tarjetas con foto** (antes 6 sin imagen): Gestión contable, Gestión laboral, Gestión tributaria, Comercio exterior. Las fotos son stock de Unsplash (licencia libre, uso comercial sin atribución) **guardadas localmente** en `public/assets/servicios/{contable,laboral,tributaria,comercio}.jpg` — no se cargan de terceros. Se pueden reemplazar por fotos reales del cliente sin tocar código (mismos nombres). Estilos nuevos: `.service-card`/`.service-media`/`.service-body` en `global.css`.
+- **Contacto:** se **quitó el formulario** (nombre/teléfono/servicio/mensaje) y quedó **solo un botón centrado "Enviar por WhatsApp"** (`.contact-cta`, usa `waLink()`). Se borró el script `scripts/whatsapp-form.ts`.
+- **Chatbot de IA (ChatSimple / Expertise AI):** integración **cableada pero DESACTIVADA** a la espera de la cuenta de Ed. Config en `data/site.ts` → `export const chat`. Mientras `enabled:false` **no se inyecta ningún script de terceros** y el CSP queda estricto (verificado). Para activarlo: crear cuenta en chatsimple.ai (hoy expertise.ai), pegar `coId` + `chatbotId` del panel y poner `enabled:true`. El `BaseLayout` **construye el CSP dinámicamente**: al activar el chat añade solo los dominios del proveedor (`https://*.chatsimple.ai`, `https://*.expertise.ai` + `wss:`) a script/img/frame/connect. Camino de activación **probado** con IDs de prueba y revertido.
+- **Privacidad:** `pages/privacidad.astro` actualizada (fecha 2026-07-01): la sección de datos ya no habla de "formulario" sino de contacto por WhatsApp/teléfono/chat, y se añadió la cláusula del chatbot de IA como encargado externo.
+
+## Qué pasó el 2026-06-26 (consolidación)
 
 Se **auditó** el proyecto (9 dimensiones, informe como Artifact) y se **consolidó en la versión Astro** como única oficial. Antes había 3 sitios paralelos; eso causaba la mayor parte de la deuda.
 
