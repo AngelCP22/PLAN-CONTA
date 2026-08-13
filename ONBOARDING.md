@@ -43,7 +43,8 @@ Node ≥ 22.12. Cloudflare Pages publica `astro-src/dist` desde la rama `main`.
 El dominio canónico es `https://asesoresmyr.com/`. Cloudflare Pages usa la rama `main`,
 la raíz `astro-src`, el comando `npm run build` y el directorio de salida `dist`.
 Cloudflare Analytics mide desde la red las solicitudes, el rendimiento y los visitantes
-únicos del dominio sin insertar un rastreador ni añadir cookies publicitarias.
+únicos del dominio. Cloudflare Web Analytics añade automáticamente su beacon para medir
+visitas y rendimiento del navegador sin añadir cookies publicitarias.
 
 ### Mejoras opcionales menores (no urgentes)
 - Self-host de fuentes Google (quitar la IP del visitante hacia Google). Mientras tanto está **declarado en `/privacidad/`**.

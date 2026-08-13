@@ -23,9 +23,10 @@ const chatOn = chat.enabled && chat.coId !== "" && chat.chatbotId !== "";
 // dominios del proveedor (script/img/frame) y sus websockets (connect).
 const chatHosts = chatOn ? chat.domains.join(" ") : "";
 const chatSockets = chatOn ? chat.domains.map((d) => d.replace("https://", "wss://")).join(" ") : "";
+const cloudflareInsights = "https://static.cloudflareinsights.com";
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' ${chatHosts}`.trim(),
+  `script-src 'self' 'unsafe-inline' ${cloudflareInsights} ${chatHosts}`.trim(),
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   `img-src 'self' data: ${chatHosts}`.trim(),

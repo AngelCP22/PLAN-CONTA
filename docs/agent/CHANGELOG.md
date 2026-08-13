@@ -5,7 +5,7 @@
 - Agent: Codex
 - Objective: consolidar identidad, contacto, SEO, analíticas y despliegue en `asesoresmyr.com`.
 - Changes and files: datos centralizados en `site.ts`; identidad Asesores MyR; WhatsApp +51 941 689 076; dirección de Chorrillos; SEO local y política de privacidad; configuración Astro raíz; workflow de validación; espejo histórico sin indexación.
-- Decisions: Cloudflare Pages como producción; Analytics de tráfico de zona para contar visitantes únicos sin rastreador; GitHub Actions valida el build y no compite con el despliegue.
+- Decisions: Cloudflare Pages como producción; Analytics de tráfico de zona y Web Analytics para contar visitas, visitantes únicos y rendimiento sin cookies publicitarias; GitHub Actions valida el build y no compite con el despliegue.
 - Tests and results: build de producción y espejo exitosos con Astro 7; `npm audit --omit=dev` con 0 vulnerabilidades; inspección visual en escritorio y móvil; comprobación de metadatos, enlaces y eliminación del calendario.
 - Problems found/fixed: CSP ampliada solo para el beacon oficial; overflow móvil corregido; dependencias vulnerables actualizadas desde Astro 5.
 - Pending work: ninguno para la publicación; seguimiento futuro en `TECH_DEBT.md`.
