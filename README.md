@@ -72,7 +72,7 @@ su beacon sin cookies publicitarias para medir visitas y rendimiento del navegad
 
 - **Datos de contacto** (teléfono, WhatsApp, ciudad, mensaje): un solo archivo →
   [`astro-src/src/data/site.ts`](astro-src/src/data/site.ts).
-- **Servicios, planes, resultados, métricas:** arreglos al inicio de
+- **Servicios, planes y métricas:** arreglos al inicio de
   [`astro-src/src/pages/index.astro`](astro-src/src/pages/index.astro).
 - **Comportamiento (menú, scroll, animaciones):** módulos en
   `astro-src/src/scripts/` (uno por característica).
@@ -91,8 +91,5 @@ Para regenerarlas tras cambiar el origen, usa `sharp` (incluido como dependencia
   falla, las demás siguen y el contenido nunca queda oculto.
 - Hay una **Content-Security-Policy** declarada por `<meta>` en `BaseLayout.astro`. Si
   agregas un script o recurso externo nuevo, recuerda permitirlo ahí.
-- **Datos personales (Ley N° 29733):** los testimonios de "Resultados" están **anonimizados**
-  (se describe el rubro, no el nombre del cliente). Si cuentas con consentimiento escrito,
-  puedes poner la razón social real en el arreglo `results` de `index.astro`. Hay una
-  **política de privacidad** en [`/privacidad`](astro-src/src/pages/privacidad.astro),
-  enlazada desde el footer.
+- Hay una **política de privacidad** en
+  [`/privacidad`](astro-src/src/pages/privacidad.astro), enlazada desde el footer.

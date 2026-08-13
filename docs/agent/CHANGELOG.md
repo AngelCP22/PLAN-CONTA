@@ -1,5 +1,13 @@
 # Engineering log
 
+## 2026-08-13 — Retiro de resultados obtenidos
+
+- Agent: Codex
+- Objective: eliminar por completo la sección pública “Resultados obtenidos”.
+- Changes and files: se retiraron contenido, datos y estilos exclusivos de resultados; se actualizaron README, onboarding y espejo histórico.
+- Decisions: se conservaron intactas las métricas de confianza solicitadas para el final del sitio.
+- Tests and results: build de Astro completado; `npm audit --omit=dev` con 0 vulnerabilidades; barrido textual y revisión responsive completados antes del despliegue.
+
 ## 2026-08-13 — Preparación de producción de Asesores MyR
 
 - Agent: Codex

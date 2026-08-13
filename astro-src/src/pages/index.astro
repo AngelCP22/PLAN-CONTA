@@ -35,16 +35,6 @@ const plans = [
   },
 ];
 
-// Resultados anonimizados por la Ley N° 29733 (Protección de Datos Personales):
-// se describe el rubro del cliente en vez de su razón social / nombre. Si cuentas
-// con consentimiento escrito del cliente, puedes reemplazar por el nombre real.
-const results = [
-  ["Empresa de perforación geotécnica", "Conciliaciones y registros ordenados", "Se estructuró el flujo mensual de documentos para reducir reprocesos y mejorar la trazabilidad.", "Resultado: cierres mensuales más claros."],
-  ["Consultora de geología y minería", "Compras y ventas con mejor sustento", "Se revisó la consistencia de comprobantes y registros para presentar información más confiable.", "Resultado: menor exposición a observaciones."],
-  ["Empresa de ingeniería geotécnica", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Resultado: obligaciones bajo seguimiento continuo."],
-  ["Profesional independiente (sector minero)", "Información centralizada para consultas", "Se concentró la documentación clave para facilitar declaraciones, respuestas y control interno.", "Resultado: soporte documentario disponible."],
-];
-
 const stats = [
   ["15+", "años de experiencia"],
   ["749", "clientes asesorados"],
@@ -163,21 +153,6 @@ const stats = [
               <ul>{plan.items.map((item) => <li>{item}</li>)}</ul>
               <a href="#contacto">Solicitar asesoría</a>
             </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="resultados">
-      <div class="container">
-        <div class="section-head left reveal-card from-left">
-          <p class="eyebrow">Resultados obtenidos</p>
-          <h2>Empresas acompañadas con problemas concretos resueltos.</h2>
-          <p>Mejoras verificables: información ordenada, obligaciones bajo control y criterios claros para responder ante SUNAT.</p>
-        </div>
-        <div class="impact-grid reveal-sequence">
-          {results.map(([company, title, text, solution], index) => (
-            <article class:list={["reveal-card", index % 2 === 0 ? "from-bottom" : "from-right"]}><span>{company}</span><h3>{title}</h3><p>{text}</p><strong>{solution}</strong></article>
           ))}
         </div>
       </div>
