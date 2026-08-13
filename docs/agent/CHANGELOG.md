@@ -8,4 +8,4 @@
 - Decisions: Cloudflare Pages como producción; Analytics de tráfico de zona para contar visitantes únicos sin rastreador; GitHub Actions valida el build y no compite con el despliegue.
 - Tests and results: build de producción y espejo exitosos con Astro 7; `npm audit --omit=dev` con 0 vulnerabilidades; inspección visual en escritorio y móvil; comprobación de metadatos, enlaces y eliminación del calendario.
 - Problems found/fixed: CSP ampliada solo para el beacon oficial; overflow móvil corregido; dependencias vulnerables actualizadas desde Astro 5.
-- Pending work: push, crear proyecto Pages, enlazar dominios, activar Analytics y verificar producción.
+- Pending work: ninguno para la publicación; seguimiento futuro en `TECH_DEBT.md`.
