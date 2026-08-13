@@ -62,7 +62,8 @@ automáticamente al recibir cambios en la rama `main`.
 
 Cloudflare Pages publica la rama `main` con raíz `astro-src`, comando `npm run build`
 y directorio de salida `dist`. Los dominios públicos son `asesoresmyr.com` y
-`www.asesoresmyr.com`. Cloudflare Web Analytics mide visitas y rendimiento desde el panel.
+`www.asesoresmyr.com`. Cloudflare Analytics mide solicitudes, rendimiento y visitantes
+únicos desde el panel de tráfico de la zona, sin insertar un rastreador en la página.
 
 ---
 
