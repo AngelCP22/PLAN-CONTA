@@ -8,8 +8,14 @@ const {
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
-const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const ogImage = new URL(`${base}assets/og-image.jpg`, Astro.site).toString();
+const normalizedBase = base === "/" ? "/" : base.replace(/\/$/, "");
+const isMirror = normalizedBase !== "/";
+const routePath =
+  normalizedBase !== "/" && Astro.url.pathname.startsWith(normalizedBase)
+    ? Astro.url.pathname.slice(normalizedBase.length) || "/"
+    : Astro.url.pathname;
+const canonical = new URL(routePath, siteData.dominio).toString();
+const ogImage = new URL("/assets/og-image.jpg", siteData.dominio).toString();
 
 // El widget de chat de IA se activa solo si hay credenciales en site.ts.
 const chatOn = chat.enabled && chat.coId !== "" && chat.chatbotId !== "";
@@ -19,7 +25,7 @@ const chatHosts = chatOn ? chat.domains.join(" ") : "";
 const chatSockets = chatOn ? chat.domains.map((d) => d.replace("https://", "wss://")).join(" ") : "";
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' ${chatHosts}`.trim(),
+  `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com/beacon.min.js ${chatHosts}`.trim(),
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   `img-src 'self' data: ${chatHosts}`.trim(),
@@ -38,6 +44,7 @@ const csp = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    {isMirror && <meta name="robots" content="noindex,follow" />}
     <meta http-equiv="Content-Security-Policy" content={csp} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -76,8 +83,15 @@ const csp = [
       name: siteData.nombre,
       areaServed: "Perú",
       telephone: siteData.telefonoDisplay,
-      url: canonical,
+      url: siteData.dominio,
       image: ogImage,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Av. El Sol Mz. K1 Lte. 10, Urbanización La Campiña",
+        addressLocality: "Chorrillos",
+        addressRegion: "Lima",
+        addressCountry: "PE",
+      },
       serviceType: [
         "Gestión contable",
         "Gestión tributaria",
@@ -96,7 +110,6 @@ const csp = [
       import { initHeaderShadow } from "../scripts/header-shadow";
       import { initScrollspy } from "../scripts/scrollspy";
       import { initToTop } from "../scripts/to-top";
-      import { initLimaClock } from "../scripts/lima-clock";
       import { initReveal } from "../scripts/reveal";
 
       // Cada característica se inicializa de forma aislada: si una falla, las
@@ -105,7 +118,7 @@ const csp = [
         try {
           fn();
         } catch (error) {
-          console.error("[M&R] init falló:", error);
+          console.error("[Asesores MyR] init falló:", error);
         }
       };
 
@@ -114,7 +127,6 @@ const csp = [
       safe(initHeaderShadow);
       safe(initScrollspy);
       safe(initToTop);
-      safe(initLimaClock);
     </script>
 
     {/* Chatbot de IA (ChatSimple / Expertise AI). Solo se inyecta cuando hay

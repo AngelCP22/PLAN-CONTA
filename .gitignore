@@ -3,3 +3,5 @@ astro-src/node_modules/
 astro-src/dist/
 astro-preview/data-store.json
 astro-preview/settings.json
+.astro-preview.*.log
+.visual-check/

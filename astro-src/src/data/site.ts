@@ -1,25 +1,28 @@
 /**
- * Fuente única de verdad para los datos de contacto y la marca de M&R Asociados.
+ * Fuente única de verdad para los datos de contacto y la marca de Asesores MyR.
  *
  * Antes el número de WhatsApp y el mensaje base estaban repetidos (hardcodeados)
  * en Header.astro, BaseLayout.astro e index.astro. Centralizarlos aquí evita
  * desincronizaciones: para cambiar el teléfono o el copy se edita un solo lugar.
  */
 export const site = {
-  nombre: "M&R Asociados",
+  nombre: "Asesores MyR",
   descripcion:
-    "M&R Asociados brinda gestión contable, tributaria, laboral, drawback y contabilidad para exportadores en Perú.",
+    "Asesores MyR brinda gestión contable, tributaria, laboral, drawback y contabilidad para exportadores en Perú.",
   /** Número para mostrar al usuario (formato legible). */
-  telefonoDisplay: "+51 956-308-249",
+  telefonoDisplay: "+51 941 689 076",
   /** Valor para enlaces tel: (sin espacios ni guiones). */
-  telefonoTel: "+51956308249",
+  telefonoTel: "+51941689076",
   /** Número para enlaces wa.me (sin '+'). */
-  whatsapp: "51956308249",
-  ciudad: "Lima, Perú",
+  whatsapp: "51941689076",
+  ciudad: "Chorrillos, Lima, Perú",
+  direccion: "Av. El Sol Mz. K1 Lte. 10, Urbanización La Campiña, Chorrillos, Lima, Perú",
+  direccionCorta: "Av. El Sol Mz. K1 Lte. 10, Urb. La Campiña, Chorrillos",
+  dominio: "https://asesoresmyr.com",
   /** Línea inicial del mensaje que se precarga en WhatsApp desde el formulario. */
-  mensajeBase: "Hola M&R Asociados, quiero información.",
+  mensajeBase: "Hola Asesores MyR, quiero información.",
   /** Texto por defecto de los botones "Solicitar asesoría". */
-  mensajeAsesoria: "Hola M&R Asociados, quiero solicitar una asesoría.",
+  mensajeAsesoria: "Hola Asesores MyR, quiero solicitar una asesoría.",
 } as const;
 
 /**

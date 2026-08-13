@@ -1,9 +1,9 @@
-# ONBOARDING / Traspaso — PLAN-CONTA (M&R Asociados)
+# ONBOARDING / Traspaso — PLAN-CONTA (Asesores MyR)
 
 > ## 🚫 REGLA OBLIGATORIA PARA AGENTES / IA
 > Puedes **revisar y proponer**, pero **NO modificar, borrar ni rediseñar nada sin autorización previa y explícita del dueño (angelcp22)**. No elimines funcionalidades existentes (calendario, formulario, secciones, navegación) "para simplificar". Explica el cambio y espera el "sí" antes de tocar código. Commits/push a `main` requieren su aprobación. Ver la regla completa en `README.md`.
 
-> Estado al **2026-07-01**. Sitio del estudio contable M&R Asociados (Lima). Léelo antes de tocar nada.
+> Estado al **2026-08-13**. Sitio de Asesores MyR (Chorrillos, Lima). Léelo antes de tocar nada.
 
 ## Rediseño 2026-07-01 (última sesión)
 
@@ -23,9 +23,9 @@ Se **auditó** el proyecto (9 dimensiones, informe como Artifact) y se **consoli
 ### Decisiones aplicadas
 - ✅ **Canónico = `astro-src/`** (Astro 5). Es lo único que se edita.
 - ✅ Versiones viejas movidas a **`legacy/`** (no se publican): index genérico, `mr-asociados.html` + copia, `opcion-estrategica.html`, plantilla.
-- ✅ `index.html` raíz → **redirección** a `astro-preview/` (la home ya no sirve la versión legacy con teléfono falso).
-- ✅ Datos de contacto centralizados en **`astro-src/src/data/site.ts`** (WhatsApp 956-308-249). No volver a hardcodear el número.
-- ✅ JS modularizado en **`astro-src/src/scripts/`** (menu, scrollspy, whatsapp-form, reveal, to-top, lima-clock, header-shadow), orquestado con try/catch en `BaseLayout.astro`.
+- ✅ `index.html` raíz → **redirección** al dominio oficial `https://asesoresmyr.com/`.
+- ✅ Datos de marca, contacto y dirección centralizados en **`astro-src/src/data/site.ts`** (WhatsApp +51 941 689 076). No volver a hardcodearlos.
+- ✅ JS modularizado en **`astro-src/src/scripts/`** (menu, scrollspy, reveal, to-top y header-shadow), orquestado con try/catch en `BaseLayout.astro`.
 - ✅ Bugs corregidos: scrollspy ("Nosotros" no se activaba), validación de teléfono peruano (9 dígitos) + `aria-live`/`aria-invalid`, overflow horizontal en móvil (`overflow-x: clip`), contraste del eyebrow (`--gold-text`), skip-link.
 - ✅ Imágenes: hero **632KB→28KB WebP** (+ JPG fallback), `og-image.jpg` 1200×630, `about.jpg` recomprimido.
 - ✅ Añadidos: `README.md`, `LICENSE`, `robots.txt`, `.nvmrc`, `engines` en package.json, workflow CI/CD opcional (`.github/workflows/deploy.yml`, manual).
@@ -34,21 +34,18 @@ Se **auditó** el proyecto (9 dimensiones, informe como Artifact) y se **consoli
 
 ## Cómo correr
 ```bash
-cd astro-src && npm ci && npm run dev   # http://127.0.0.1:4321/PLAN-CONTA/astro-preview/
-npm run build                           # genera ../astro-preview (commitearlo si Pages sirve desde rama)
+cd astro-src && npm ci && npm run dev   # http://127.0.0.1:4321/
+npm run build                           # genera ./dist para Cloudflare Pages
 ```
-Node ≥ 20.3. Si Pages sirve desde rama, **recuerda commitear `astro-preview/` tras cada build**.
+Node ≥ 22.12. Cloudflare Pages publica `astro-src/dist` desde la rama `main`.
 
-## Pendiente — ÚNICO paso, solo lo puede hacer el dueño del repo en GitHub
-**URL limpia (opcional).** Hoy el sitio funciona en `…/PLAN-CONTA/astro-preview/` (vía redirect del `index.html` raíz). Para dejarlo en `…/PLAN-CONTA/`:
-1. GitHub → Settings → Pages → Source = **"GitHub Actions"**.
-2. En `astro-src/astro.config.mjs`: `base: "/PLAN-CONTA"` y `outDir: "./dist"`.
-3. Activar el trigger `push` en `.github/workflows/deploy.yml`.
-4. Borrar `astro-preview/` y el `index.html` raíz de redirección.
-
-Mientras no se haga, **el sitio ya funciona** tal cual (no es bloqueante).
+## Producción
+El dominio canónico es `https://asesoresmyr.com/`. Cloudflare Pages usa la rama `main`,
+la raíz `astro-src`, el comando `npm run build` y el directorio de salida `dist`.
+Cloudflare Web Analytics se instala automáticamente en el dominio para medir visitas y
+rendimiento sin añadir cookies publicitarias.
 
 ### Mejoras opcionales menores (no urgentes)
 - Self-host de fuentes Google (quitar la IP del visitante hacia Google). Mientras tanto está **declarado en `/privacidad/`**.
 
-Detalle completo en `README.md`. Si Pages sigue sirviendo desde la rama, **commitear `astro-preview/` tras cada `npm run build`**.
+Detalle completo en `README.md`. `astro-preview/` se conserva solo como espejo histórico generado.

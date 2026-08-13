@@ -1,4 +1,4 @@
-# M&R Asociados — Sitio web (PLAN-CONTA)
+# Asesores MyR — Sitio web (PLAN-CONTA)
 
 > ## 🚫 REGLA OBLIGATORIA PARA AGENTES / IA
 > **Este repositorio pertenece a su dueño (angelcp22). Cualquier agente o IA que trabaje aquí DEBE OBEDECER esta regla:**
@@ -11,13 +11,13 @@
 >
 > _Incumplir esto (p. ej. quitar el calendario o el formulario sin avisar) obliga a revertir el trabajo._
 
-Landing page del estudio contable **M&R Asociados** (Lima, Perú): gestión contable,
+Landing page del estudio contable **Asesores MyR** (Chorrillos, Lima, Perú): gestión contable,
 tributaria, laboral, drawback y contabilidad para exportadores. Capta consultas vía
-WhatsApp (**+51 956-308-249**).
+WhatsApp (**+51 941 689 076**).
 
-- **URL pública:** https://angelcp22.github.io/PLAN-CONTA/
-- **Stack:** [Astro 5](https://astro.build/) (sitio estático), HTML/CSS/JS, sin backend.
-- **Hosting:** GitHub Pages.
+- **URL pública:** https://asesoresmyr.com/
+- **Stack:** [Astro 7](https://astro.build/) (sitio estático), HTML/CSS/JS, sin backend.
+- **Hosting:** Cloudflare Pages conectado a GitHub.
 
 ---
 
@@ -26,10 +26,10 @@ WhatsApp (**+51 956-308-249**).
 | Carpeta / archivo | Qué es | Estado |
 |---|---|---|
 | **`astro-src/`** | **Código fuente oficial del sitio (Astro).** Aquí se edita TODO. | ✅ Canónico |
-| `astro-preview/` | Build generado que publica GitHub Pages. **No editar a mano.** | 🤖 Generado |
-| `index.html` (raíz) | Redirección a `astro-preview/` (evita servir contenido viejo en la home). | 🔁 Puente |
+| `astro-preview/` | Espejo generado para conservar la URL histórica de GitHub. **No editar a mano.** | 🤖 Generado |
+| `index.html` (raíz) | Redirección desde GitHub Pages al dominio oficial. | 🔁 Puente |
 | `legacy/` | Versiones antiguas archivadas (HTML estáticos + plantilla). **No se publican.** | 🗄️ Archivo |
-| `.github/workflows/` | CI/CD opcional para desplegar con GitHub Actions. | 🧩 Opcional |
+| `.github/workflows/` | Validación automática del build en cada cambio. | 🧩 CI |
 
 > La carpeta `legacy/` conserva las versiones previas (la genérica "Estudio Contable",
 > `mr-asociados.html`, su copia y `opcion-estrategica.html`). Se mantienen solo como
@@ -40,36 +40,29 @@ WhatsApp (**+51 956-308-249**).
 
 ## 🚀 Desarrollo local
 
-**Requisitos:** Node.js **≥ 20.3** (ver `astro-src/.nvmrc`) y npm ≥ 9.
+**Requisitos:** Node.js **≥ 22.12** (ver `astro-src/.nvmrc`) y npm ≥ 9.6.5.
 
 ```bash
 cd astro-src
 npm ci            # instala dependencias exactas del lockfile
-npm run dev       # servidor local en http://127.0.0.1:4321/PLAN-CONTA/astro-preview/
+npm run dev       # servidor local en http://127.0.0.1:4321/
 ```
 
 ## 🏗️ Compilar el sitio
 
 ```bash
 cd astro-src
-npm run build     # genera el sitio en ../astro-preview/
+npm run build     # genera el sitio en ./dist/
 ```
 
-El build se escribe en `astro-preview/`. Si publicas desde la rama (modo actual de Pages),
-**hay que commitear `astro-preview/` después de cada build** para que los cambios salgan al aire.
+El build de producción se escribe en `astro-src/dist/`. Cloudflare Pages ejecuta el build
+automáticamente al recibir cambios en la rama `main`.
 
 ## ☁️ Despliegue
 
-Hoy GitHub Pages publica **desde la rama `main`, carpeta raíz**. La home (`index.html`)
-redirige al sitio Astro en `astro-preview/`.
-
-### Recomendado: automatizar con GitHub Actions (URL limpia)
-
-1. GitHub → **Settings → Pages → Source = "GitHub Actions"**.
-2. En `astro-src/astro.config.mjs` cambia `base` a `"/PLAN-CONTA"` y `outDir` a `"./dist"`.
-3. Activa el workflow `.github/workflows/deploy.yml` (quita el comentario del trigger `push`).
-4. Una vez funcionando, puedes **borrar `astro-preview/` y el `index.html` de redirección**;
-   el sitio quedará directo en `https://angelcp22.github.io/PLAN-CONTA/`.
+Cloudflare Pages publica la rama `main` con raíz `astro-src`, comando `npm run build`
+y directorio de salida `dist`. Los dominios públicos son `asesoresmyr.com` y
+`www.asesoresmyr.com`. Cloudflare Web Analytics mide visitas y rendimiento desde el panel.
 
 ---
 
@@ -79,7 +72,7 @@ redirige al sitio Astro en `astro-preview/`.
   [`astro-src/src/data/site.ts`](astro-src/src/data/site.ts).
 - **Servicios, planes, resultados, métricas:** arreglos al inicio de
   [`astro-src/src/pages/index.astro`](astro-src/src/pages/index.astro).
-- **Comportamiento (menú, formulario, reloj, animaciones):** módulos en
+- **Comportamiento (menú, scroll, animaciones):** módulos en
   `astro-src/src/scripts/` (uno por característica).
 - **Estilos y tokens de marca:** [`astro-src/src/styles/global.css`](astro-src/src/styles/global.css).
 

@@ -41,7 +41,7 @@ const plans = [
 const results = [
   ["Empresa de perforación geotécnica", "Conciliaciones y registros ordenados", "Se estructuró el flujo mensual de documentos para reducir reprocesos y mejorar la trazabilidad.", "Resultado: cierres mensuales más claros."],
   ["Consultora de geología y minería", "Compras y ventas con mejor sustento", "Se revisó la consistencia de comprobantes y registros para presentar información más confiable.", "Resultado: menor exposición a observaciones."],
-  ["Empresa de ingeniería geotécnica", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Resultado: calendario tributario siempre visible."],
+  ["Empresa de ingeniería geotécnica", "Obligaciones mensuales monitoreadas", "Se organizaron pendientes y fechas clave para dar seguimiento continuo a declaraciones y libros.", "Resultado: obligaciones bajo seguimiento continuo."],
   ["Profesional independiente (sector minero)", "Información centralizada para consultas", "Se concentró la documentación clave para facilitar declaraciones, respuestas y control interno.", "Resultado: soporte documentario disponible."],
 ];
 
@@ -78,31 +78,17 @@ const stats = [
             <li>Exportadores y drawback</li>
           </ul>
         </div>
-        <aside class="calendar-panel reveal-card from-right">
-          <div class="calendar-top">
-            <span>Calendario tributario</span>
-            <strong data-clock>--:--</strong>
-          </div>
-          <div class="calendar-date">
-            <span data-weekday>Actualizando</span>
-            <strong data-date>--/--/----</strong>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section class="section" id="nosotros">
-      <div class="container split">
-        <div class="reveal-card from-left">
-          <p class="eyebrow">Quiénes somos</p>
-          <h2>Tu aliado estratégico empresarial.</h2>
-          <p>En M&R Asociados ordenamos la información contable, tributaria y laboral para que tu empresa tenga claridad, cumpla a tiempo y reduzca riesgos.</p>
-        </div>
-        <div class="feature-grid reveal-sequence" id="propositos">
-          <article class="reveal-card from-bottom"><span>01</span><strong>Cálculos exactos</strong></article>
-          <article class="reveal-card from-bottom"><span>02</span><strong>Cumplimiento normativo</strong></article>
-          <article class="reveal-card from-bottom"><span>03</span><strong>Claridad financiera</strong></article>
-          <article class="reveal-card from-bottom"><span>04</span><strong>Prevención tributaria</strong></article>
+    <section class="section about-section" id="nosotros">
+      <div class="container about-grid">
+        <figure class="about-media reveal-card from-left">
+          <img src={`${base}assets/about-team.webp`} alt={`Equipo de tres asesores de ${site.nombre} con traje formal en una oficina corporativa`} width="1536" height="1024" loading="lazy" decoding="async" />
+        </figure>
+        <div class="about-content reveal-card from-right" id="propositos">
+          <h2 class="about-title">¿Quiénes somos?</h2>
+          <p>Somos un equipo de profesionales con experiencia en asesoría contable, tributaria y empresarial. Nos enfocamos en brindar soluciones integrales y personalizadas que impulsen el crecimiento y la tranquilidad de nuestros clientes.</p>
         </div>
       </div>
     </section>
@@ -148,7 +134,7 @@ const stats = [
           {services.map(([title, text, img], index) => (
             <article class:list={["service-card", "reveal-card", index % 2 === 0 ? "from-bottom" : "from-right"]}>
               <div class="service-media">
-                <img src={`${base}assets/servicios/${img}.jpg`} alt={`${title} — M&R Asociados`} width="900" height="650" loading="lazy" decoding="async" />
+                <img src={`${base}assets/servicios/${img}.jpg`} alt={`${title} — ${site.nombre}`} width="900" height="650" loading="lazy" decoding="async" />
               </div>
               <div class="service-body">
                 <h3>{title}</h3>
@@ -206,7 +192,7 @@ const stats = [
           <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M16.04 4.5c-6.35 0-11.5 5.08-11.5 11.34 0 2 .53 3.95 1.55 5.67L4.5 27.5l6.18-1.6a11.66 11.66 0 0 0 5.36 1.3c6.35 0 11.5-5.08 11.5-11.35 0-3.03-1.2-5.88-3.37-8.02a11.56 11.56 0 0 0-8.13-3.33Zm0 2.17c2.5 0 4.84.96 6.6 2.7a9.02 9.02 0 0 1 2.74 6.48c0 5.06-4.2 9.18-9.34 9.18-1.6 0-3.17-.4-4.55-1.18l-.5-.28-3.67.95.98-3.52-.32-.52a9.04 9.04 0 0 1-1.4-4.86c0-5.06 4.2-9.18 9.34-9.18Zm-4.1 4.4c-.2 0-.5.07-.77.36-.26.3-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.14.19 2 3.16 4.93 4.3 2.44.95 2.94.76 3.47.71.53-.05 1.7-.69 1.94-1.36.24-.66.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33-.29-.14-1.7-.83-1.96-.92-.26-.1-.46-.15-.65.14-.19.29-.74.92-.9 1.1-.17.2-.34.22-.62.08a7.84 7.84 0 0 1-2.31-1.41 8.55 8.55 0 0 1-1.6-1.97c-.17-.29-.02-.44.13-.58.13-.13.28-.34.43-.5.14-.18.19-.3.29-.5.1-.18.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.47-.49-.65-.5l-.62-.02Z"/></svg>
           Enviar por WhatsApp
         </a>
-        <div class="contact-pills"><a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a><span>{site.ciudad}</span></div>
+        <div class="contact-pills"><a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a><span>{site.direccionCorta}</span></div>
       </div>
     </section>
 
@@ -233,13 +219,13 @@ const stats = [
   <footer class="footer">
     <div class="container footer-grid reveal-sequence">
       <a class="brand reveal-card from-bottom" href="#inicio">
-        <img src={`${base}assets/logo-mark.png`} alt="Logo M&R Asociados" width="42" height="42" loading="lazy" />
-        <span><strong>M&amp;R Asociados</strong><small>Gestión contable, tributaria y laboral</small></span>
+        <img src={`${base}assets/logo-mark.png`} alt={`Logo ${site.nombre}`} width="42" height="42" loading="lazy" />
+        <span><strong>{site.nombre}</strong><small>Gestión contable, tributaria y laboral</small></span>
       </a>
       <div class="reveal-card from-bottom"><strong>Servicios</strong><a href="#servicios">Gestión contable</a><a href="#exportacion">Drawback y exportación</a><a href="#planes">Planes</a></div>
-      <div class="reveal-card from-bottom"><strong>Contacto</strong><a href={`tel:${site.telefonoTel}`}>956-308-249</a><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp directo</a></div>
+      <div class="reveal-card from-bottom"><strong>Contacto</strong><a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp directo</a><span>{site.direccionCorta}</span></div>
     </div>
-    <div class="container footer-bottom"><span>© {year} M&amp;R Asociados. Todos los derechos reservados.</span><span><a href={`${base}privacidad/`}>Política de privacidad</a> · {site.ciudad} · Atención a empresas de todo el país.</span></div>
+    <div class="container footer-bottom"><span>© {year} {site.nombre}. Todos los derechos reservados.</span><span><a href={`${base}privacidad/`}>Política de privacidad</a> · {site.ciudad} · Atención a empresas de todo el país.</span></div>
   </footer>
 
   <a class="wa-float" href={waLink()} target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">

@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
 
 const base = import.meta.env.BASE_URL;
-const actualizado = "1 de julio de 2026";
+const actualizado = "13 de agosto de 2026";
 ---
 
 <BaseLayout
@@ -14,7 +14,7 @@ const actualizado = "1 de julio de 2026";
     <div class="container nav">
       <a class="brand" href={base} aria-label="Ir al inicio">
         <img src={`${base}assets/logo-mark.png`} alt={`Logo ${site.nombre}`} width="42" height="42" />
-        <span><strong>M&amp;R Asociados</strong><small>Gestión contable, tributaria y laboral</small></span>
+        <span><strong>{site.nombre}</strong><small>Gestión contable, tributaria y laboral</small></span>
       </a>
       <a class="button gold" href={base}>Volver al inicio</a>
     </div>
@@ -34,7 +34,7 @@ const actualizado = "1 de julio de 2026";
 
       <h2>1. Responsable del tratamiento</h2>
       <p>
-        {site.nombre}, con atención en {site.ciudad}. Puedes contactarnos por WhatsApp o teléfono al
+        {site.nombre}, con domicilio en {site.direccion}. Puedes contactarnos por WhatsApp o teléfono al
         <a href={`tel:${site.telefonoTel}`}>{site.telefonoDisplay}</a>.
       </p>
 
@@ -44,7 +44,7 @@ const actualizado = "1 de julio de 2026";
         por teléfono o a través del chat del sitio: normalmente tu nombre, tu número de contacto y el
         detalle de tu consulta.
       </p>
-      <p>El sitio no usa cookies de seguimiento ni crea perfiles de los visitantes.</p>
+      <p>El sitio no usa cookies publicitarias ni crea perfiles comerciales de los visitantes.</p>
 
       <h2>3. Finalidad</h2>
       <p>
@@ -64,8 +64,10 @@ const actualizado = "1 de julio de 2026";
       <ul>
         <li><strong>Google Fonts:</strong> el sitio carga tipografías desde los servidores de Google, que
           puede recibir tu dirección IP al renderizar la página.</li>
-        <li><strong>GitHub Pages:</strong> el sitio está alojado en GitHub Pages, que procesa los datos
+        <li><strong>Cloudflare Pages:</strong> el sitio está alojado en Cloudflare Pages, que procesa los datos
           técnicos habituales de cualquier servidor web (p. ej. la IP de conexión).</li>
+        <li><strong>Cloudflare Web Analytics:</strong> recoge métricas agregadas de visitas y rendimiento
+          para entender cuántas personas usan el sitio y mejorar su funcionamiento, sin fines publicitarios.</li>
         <li><strong>Chat de IA (ChatSimple / Expertise AI):</strong> cuando el chat en vivo está activo, un
           proveedor externo procesa los mensajes que escribes en la ventana de chat para responder tus
           consultas. Solo se activa si abres y usas esa ventana; si no la usas, no se le envían datos.</li>

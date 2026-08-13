@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://angelcp22.github.io/PLAN-CONTA/astro-preview/sitemap-index.xml
+Sitemap: https://asesoresmyr.com/sitemap-index.xml
