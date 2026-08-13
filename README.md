@@ -1,4 +1,4 @@
-# Asesores MyR — Sitio web (PLAN-CONTA)
+# Asesores M&R — Sitio web (PLAN-CONTA)
 
 > ## 🚫 REGLA OBLIGATORIA PARA AGENTES / IA
 > **Este repositorio pertenece a su dueño (angelcp22). Cualquier agente o IA que trabaje aquí DEBE OBEDECER esta regla:**
@@ -11,7 +11,7 @@
 >
 > _Incumplir esto (p. ej. quitar el calendario o el formulario sin avisar) obliga a revertir el trabajo._
 
-Landing page del estudio contable **Asesores MyR** (Chorrillos, Lima, Perú): gestión contable,
+Landing page del estudio contable **Asesores M&R** (Chorrillos, Lima, Perú): gestión contable,
 tributaria, laboral, drawback y contabilidad para exportadores. Capta consultas vía
 WhatsApp (**+51 941 689 076**).
 
